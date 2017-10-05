@@ -59,13 +59,17 @@ class wp_braintree {
 
     // Construct the plugin
     public function __construct() {
+        
+        define("WPB_URL",plugins_url('',__FILE__));
+        define("WPB_PATH",dirname(__FILE__));
 
         load_plugin_textdomain('wp_braintree_lang', false, dirname(plugin_basename(__FILE__)) . '/lang');  // Load plugin text domain
-
+        require_once(WPB_PATH.'/includes/admin/post.class.php');
+        
         add_action('admin_init', array($this, 'admin_init'));  // Used for registering settings
         add_action('admin_menu', array($this, 'add_page'));  // Creates admin menu page and conditionally loads scripts and styles on admin page
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
-        add_action('init', array($this, 'register_post_type'));
+        add_action('init', array('wp_braintree_post', 'register_post_type'));
         add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
         add_action('init', array($this, 'wp_braintree_tinymce_button'));  // Create tinymce button
         add_action('wp_enqueue_scripts', array($this, 'head_styles_scripts'));  // Add scripts and styles to frontend (shortcode used to filter posts so it is not added to all)
@@ -129,51 +133,6 @@ class wp_braintree {
         add_submenu_page(
                 'edit.php?post_type=braintree_payment', __('Settings', 'wp_braintree_lang'), __('Settings', 'wp_braintree_lang'), 'manage_options', 'settings', array($this, 'options_do_page')
         );
-    }
-
-    public function register_post_type() {
-        $labels = array(
-            'name' => _x('Payments', 'Post Type General Name', 'wp_braintree_lang'),
-            'singular_name' => _x('Payment', 'Post Type Singular Name', 'wp_braintree_lang'),
-            'menu_name' => __('Braintree Payments', 'wp_braintree_lang'),
-            'parent_item_colon' => __('Parent Payment:', 'wp_braintree_lang'),
-            'all_items' => __('Payments', 'wp_braintree_lang'),
-            'view_item' => __('View Payment', 'wp_braintree_lang'),
-            'add_new_item' => __('Add New Payment', 'wp_braintree_lang'),
-            'add_new' => __('Add New', 'wp_braintree_lang'),
-            'edit_item' => __('Edit Payment', 'wp_braintree_lang'),
-            'update_item' => __('Update Payment', 'wp_braintree_lang'),
-            'search_items' => __('Search Payment', 'wp_braintree_lang'),
-            'not_found' => __('Not found', 'wp_braintree_lang'),
-            'not_found_in_trash' => __('Not found in Trash', 'wp_braintree_lang'),
-        );
-
-        $menu_icon = plugins_url('/js/images/wp_braintree.png', __FILE__);
-        $args = array(
-            'label' => __('payments', 'wp_braintree_lang'),
-            'description' => __('Braintree Payments', 'wp_braintree_lang'),
-            'labels' => $labels,
-            'supports' => array('title', 'editor', 'excerpt', 'revisions', 'custom-fields',),
-            'hierarchical' => false,
-            'public' => false,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'show_in_nav_menus' => true,
-            'show_in_admin_bar' => true,
-            'menu_position' => 80,
-            'menu_icon' => $menu_icon,
-            'can_export' => true,
-            'has_archive' => false,
-            'exclude_from_search' => true,
-            'publicly_queryable' => false,
-            'capability_type' => 'post',
-            'capabilities' => array(
-                'create_posts' => false, // Removes support for the "Add New" function
-            ),
-            'map_meta_cap' => true,
-        );
-
-        register_post_type('braintree_payment', $args);
     }
 
     // Generate admin options page
