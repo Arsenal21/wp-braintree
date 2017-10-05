@@ -65,6 +65,8 @@ class wp_braintree {
         add_action('admin_init', array($this, 'admin_init'));  // Used for registering settings
         add_action('admin_menu', array($this, 'add_page'));  // Creates admin menu page and conditionally loads scripts and styles on admin page
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+        add_action('init', array($this, 'register_post_type'));
+        add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
         add_action('init', array($this, 'wp_braintree_tinymce_button'));  // Create tinymce button
         add_action('wp_enqueue_scripts', array($this, 'head_styles_scripts'));  // Add scripts and styles to frontend (shortcode used to filter posts so it is not added to all)
         add_shortcode('wp_braintree_button', array($this, 'wp_braintree_button_shortcode'));  // Generate shortcode output
@@ -108,11 +110,11 @@ class wp_braintree {
 
     // Initialize admin page
     public function add_page() {
-        $wp_braintree_page = add_options_page(__('WP BrainTree', 'wp_braintree_lang'), __('WP BrainTree', 'wp_braintree_lang'), 'manage_options', 'wp_braintree_options', array($this, 'options_do_page'));
+        //$wp_braintree_page = add_options_page(__('WP BrainTree', 'wp_braintree_lang'), __('WP BrainTree', 'wp_braintree_lang'), 'manage_options', 'wp_braintree_options', array($this, 'options_do_page'));
     }
 
     public function enqueue_admin_scripts($hook) {
-        if ('settings_page_wp_braintree_options' != $hook) {
+        if ('braintree_payment_page_settings' != $hook) {
             return;
         }
         wp_enqueue_script('jquery-ui-tabs');  // For admin panel page tabs
@@ -120,6 +122,58 @@ class wp_braintree {
         wp_enqueue_script('wp_braintree_scripts', plugins_url('/js/admin_page.js', __FILE__), array('jquery'));  // Apply admin page scripts       
         wp_enqueue_style('wp_braintree_styles', plugins_url('/css/admin_page.css', __FILE__));  // Apply admin page styles
         wp_enqueue_style('jquery-ui-theme', plugins_url('/css/themes/smoothness/jquery-ui.css', __FILE__));  //include jquery-ui.css (smoothness theme)
+    }
+
+    public function add_plugin_admin_menu() {
+
+        add_submenu_page(
+                'edit.php?post_type=braintree_payment', __('Settings', 'wp_braintree_lang'), __('Settings', 'wp_braintree_lang'), 'manage_options', 'settings', array($this, 'options_do_page')
+        );
+    }
+
+    public function register_post_type() {
+        $labels = array(
+            'name' => _x('Payments', 'Post Type General Name', 'wp_braintree_lang'),
+            'singular_name' => _x('Payment', 'Post Type Singular Name', 'wp_braintree_lang'),
+            'menu_name' => __('Braintree Payments', 'wp_braintree_lang'),
+            'parent_item_colon' => __('Parent Payment:', 'wp_braintree_lang'),
+            'all_items' => __('Payments', 'wp_braintree_lang'),
+            'view_item' => __('View Payment', 'wp_braintree_lang'),
+            'add_new_item' => __('Add New Payment', 'wp_braintree_lang'),
+            'add_new' => __('Add New', 'wp_braintree_lang'),
+            'edit_item' => __('Edit Payment', 'wp_braintree_lang'),
+            'update_item' => __('Update Payment', 'wp_braintree_lang'),
+            'search_items' => __('Search Payment', 'wp_braintree_lang'),
+            'not_found' => __('Not found', 'wp_braintree_lang'),
+            'not_found_in_trash' => __('Not found in Trash', 'wp_braintree_lang'),
+        );
+
+        $menu_icon = plugins_url('/js/images/wp_braintree.png', __FILE__);
+        $args = array(
+            'label' => __('payments', 'wp_braintree_lang'),
+            'description' => __('Braintree Payments', 'wp_braintree_lang'),
+            'labels' => $labels,
+            'supports' => array('title', 'editor', 'excerpt', 'revisions', 'custom-fields',),
+            'hierarchical' => false,
+            'public' => false,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_nav_menus' => true,
+            'show_in_admin_bar' => true,
+            'menu_position' => 80,
+            'menu_icon' => $menu_icon,
+            'can_export' => true,
+            'has_archive' => false,
+            'exclude_from_search' => true,
+            'publicly_queryable' => false,
+            'capability_type' => 'post',
+            'capabilities' => array(
+                'create_posts' => false, // Removes support for the "Add New" function
+            ),
+            'map_meta_cap' => true,
+        );
+
+        register_post_type('braintree_payment', $args);
     }
 
     // Generate admin options page
@@ -137,10 +191,10 @@ class wp_braintree {
             ?>
 
             <h2 class="nav-tab-wrapper">  
-                <a href="?page=wp_braintree_options&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
-                <a href="?page=wp_braintree_options&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
-                <a href="?page=wp_braintree_options&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
-                <a href="?page=wp_braintree_options&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a> 
+                <a href="?post_type=braintree_payment&page=settings&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
+                <a href="?post_type=braintree_payment&page=settings&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
+                <a href="?post_type=braintree_payment&page=settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
+                <a href="?post_type=braintree_payment&page=settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a> 
             </h2>  
 
             <div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
@@ -174,11 +228,11 @@ class wp_braintree {
                                 </td>
                             </tr>
                             <!--
-                            <tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                           ?></th>
+                            <tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                   ?></th>
                                 <td>
-                                    <input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                         ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                          ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                          ?>/>
+                                    <input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                 ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                  ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                  ?>/>
                                     <br />
-                            <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')  ?>
+                            <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')    ?>
                                 </td>
                             </tr>
                             -->
@@ -243,15 +297,15 @@ class wp_braintree {
                         </p>
 
                         <!--
-                        <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                           ?></h3>
+                        <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                   ?></h3>
                         <p>
-                        <?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang'); ?>
+                        <?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');   ?>
                         <br />
-                        <?php //_e('If preferred, the plugin can be switched to create customer accounts on each transaction.' ,'wp_braintree_lang'); ?>
+                        <?php //_e('If preferred, the plugin can be switched to create customer accounts on each transaction.' ,'wp_braintree_lang');   ?>
                         <br />
-                        <?php //_e('This will add additional form fields for the customers first name, last name and postal code.' ,'wp_braintree_lang'); ?>
+                        <?php //_e('This will add additional form fields for the customers first name, last name and postal code.' ,'wp_braintree_lang');   ?>
                         <br />
-                        <?php //_e('Additional form options may be available in the future. Please ask your administrator to contact us with suggestions.' ,'wp_braintree_lang'); ?>
+                        <?php //_e('Additional form options may be available in the future. Please ask your administrator to contact us with suggestions.' ,'wp_braintree_lang');   ?>
                         </p>
                         -->
 
@@ -549,13 +603,6 @@ class wp_braintree {
         set_transient($trans_name, $item_name, 2 * 3600); //Save the item name for this item for 2 hours.
         $trans_name = 'wp-braintree-' . sanitize_title_with_dashes($item_name); //Create key using the item name.
         set_transient($trans_name, $item_amount, 2 * 3600); //Save the price for this item for 2 hours.
-        // Create buy now button
-        $button_form .= '<div class="wp_braintree_button_div">';
-        $button_form .= '<form name="wp_braintree_button_submit" action="" method="POST" class="pure-form pure-form-stacked">';
-        $button_form .= '<button type="button" class="pure-button pure-button-primary submit_buy_now">' . esc_attr($button_text) . '</button>';
-        $button_form .= '</form>';
-        $button_form .= '</div>';
-
         // Generate the associated form output for payment processing
         // These are hidden on page load via jquery.
         // Clicking the button[code] above.. shows/hides the associated form.
@@ -626,6 +673,14 @@ class wp_braintree {
         $button_form .= ob_get_clean();
         $button_form .= '<script src="https://js.braintreegateway.com/web/3.6.0/js/client.min.js"></script>';
         $button_form .= '<script src="https://js.braintreegateway.com/web/3.6.0/js/hosted-fields.min.js"></script>';
+
+        // Create buy now button
+        $button_form .= '<div class="wp_braintree_button_div">';
+        $button_form .= '<form name="wp_braintree_button_submit" action="" method="POST" class="pure-form pure-form-stacked">';
+        $button_form .= '<button type="button" class="pure-button pure-button-primary submit_buy_now">' . esc_attr($button_text) . '</button>';
+        $button_form .= '</form>';
+        $button_form .= '</div>';
+
         $button_form .= '</div>';
 
         return $button_form;
