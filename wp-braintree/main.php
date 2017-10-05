@@ -59,13 +59,13 @@ class wp_braintree {
 
     // Construct the plugin
     public function __construct() {
-        
-        define("WPB_URL",plugins_url('',__FILE__));
-        define("WPB_PATH",dirname(__FILE__));
+
+        define("WPB_URL", plugins_url('', __FILE__));
+        define("WPB_PATH", dirname(__FILE__));
 
         load_plugin_textdomain('wp_braintree_lang', false, dirname(plugin_basename(__FILE__)) . '/lang');  // Load plugin text domain
-        require_once(WPB_PATH.'/includes/admin/post.class.php');
-        
+        require_once(WPB_PATH . '/includes/admin/post.class.php');
+
         add_action('admin_init', array($this, 'admin_init'));  // Used for registering settings
         add_action('admin_menu', array($this, 'add_page'));  // Creates admin menu page and conditionally loads scripts and styles on admin page
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -187,9 +187,9 @@ class wp_braintree {
                                 </td>
                             </tr>
                             <!--
-                            <tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                   ?></th>
+                            <tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                    ?></th>
                                 <td>
-                                    <input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                 ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                  ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                  ?>/>
+                                    <input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                  ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                   ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                   ?>/>
                                     <br />
                             <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')    ?>
                                 </td>
@@ -256,7 +256,7 @@ class wp_braintree {
                         </p>
 
                         <!--
-                        <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                   ?></h3>
+                        <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                    ?></h3>
                         <p>
                         <?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');   ?>
                         <br />
@@ -457,6 +457,17 @@ class wp_braintree {
                         $args = $_SESSION[$wp_braintree_order_id];
                         $url_data = esc_url_raw($args['url']);
                     }
+
+                    $payment_data = array();
+                    $payment_data['name'] = sanitize_text_field($_POST['wp-braintree-name']);
+                    $payment_data['email'] = sanitize_email($_POST['wp-braintree-email']);
+                    $payment_data['amount'] = $item_price;
+                    $payment_data['item_name'] = $item_name;
+                    $payment_data['trans_id'] = $result->transaction->id;
+                    $payment_data['order_id'] = $wp_braintree_order_id;
+                    $payment_data['date'] = time();
+                    
+                    wp_braintree_post::insert_post($payment_data);
 
                     //Trigger the purchase success action hook
                     do_action('wp_braintree_payment_completed', $wp_braintree_order_id);

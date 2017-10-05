@@ -23,7 +23,7 @@ class wp_braintree_post {
             'not_found_in_trash' => __('Not found in Trash', 'wp_braintree_lang'),
         );
 
-        $menu_icon = WPB_URL.'/js/images/wp_braintree.png';
+        $menu_icon = WPB_URL . '/js/images/wp_braintree.png';
         $args = array(
             'label' => __('payments', 'wp_braintree_lang'),
             'description' => __('Braintree Payments', 'wp_braintree_lang'),
@@ -52,7 +52,31 @@ class wp_braintree_post {
     }
 
     static function insert_post($data) {
+        $post = array();
+        $post['post_title'] = sanitize_text_field($data['item_name'] . ' - ' . $data['amount'].', '.__('paid by ','wp_braintree_lang').$data['name'].' ('.$data['email'].') ');
+        $post['post_status'] = 'publish';
+
+        $output = '';
+        $output .= __("<h4>Payment Details</h4>", "wp_braintree_lang") . "\n";
+        $output .= __("Payment Time: ", "wp_braintree_lang") . date("F j, Y, g:i a", $data['date']) . "\n";
+        $output .= __("Transaction ID: ", "wp_braintree_lang") . $data['trans_id'] . "\n";
+        $output .= __("Order ID: ", "wp_braintree_lang") . $data['order_id'] . "\n";
+//        $output .= __("Description: ", "wp_braintree_lang") . $order_details['charge_description'] . "\n";
+        $output .= "--------------------------------" . "\n";
+        $output .= __("Item Name: ", "wp_braintree_lang") . $data['item_name'] . "\n";
+        $output .= __("Amount Paid: ", "wp_braintree_lang") . $data['amount'] . "\n";
+        $output .= "--------------------------------" . "\n";
+
+        $output .= "\n";
+
+        $output .= __("<h4>Customer Details</h4>", "wp_braintree_lang") . "\n";
+        $output .= __("Name: ", "") . $data['name'] . "\n";
+        $output .= __("E-Mail Address: ", "wp_braintree_lang") . $data['email'] . "\n";
+
+        $post['post_content'] = $output;
+        $post['post_type'] = 'braintree_payment';
         
+        return wp_insert_post($post); //Return post ID
     }
 
 }
