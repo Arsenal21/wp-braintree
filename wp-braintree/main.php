@@ -118,7 +118,7 @@ class wp_braintree {
     }
 
     public function enqueue_admin_scripts($hook) {
-        if ('braintree_payment_page_settings' != $hook) {
+        if ('braintree_payment_page_wp_braintree_settings' != $hook) {
             return;
         }
         wp_enqueue_script('jquery-ui-tabs');  // For admin panel page tabs
