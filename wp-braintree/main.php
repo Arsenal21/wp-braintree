@@ -131,7 +131,7 @@ class wp_braintree {
     public function add_plugin_admin_menu() {
 
         add_submenu_page(
-                'edit.php?post_type=braintree_payment', __('Settings', 'wp_braintree_lang'), __('Settings', 'wp_braintree_lang'), 'manage_options', 'settings', array($this, 'options_do_page')
+                'edit.php?post_type=braintree_payment', __('Settings', 'wp_braintree_lang'), __('Settings', 'wp_braintree_lang'), 'manage_options', 'wp_braintree_settings', array($this, 'options_do_page')
         );
     }
 
