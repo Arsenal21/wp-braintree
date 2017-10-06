@@ -4,7 +4,7 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: http://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 1.5
+ * Version: 1.6
  * Author: Tips and Tricks HQ, josh401, wptipsntricks
  * Author URI: http://www.tipsandtricks-hq.com/
  * License: GPL2

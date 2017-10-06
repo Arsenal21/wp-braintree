@@ -10,7 +10,7 @@ class wp_braintree_post {
         $labels = array(
             'name' => _x('Payments', 'Post Type General Name', 'wp_braintree_lang'),
             'singular_name' => _x('Payment', 'Post Type Singular Name', 'wp_braintree_lang'),
-            'menu_name' => __('Braintree Payments', 'wp_braintree_lang'),
+            'menu_name' => __('WP Braintree', 'wp_braintree_lang'),
             'parent_item_colon' => __('Parent Payment:', 'wp_braintree_lang'),
             'all_items' => __('Payments', 'wp_braintree_lang'),
             'view_item' => __('View Payment', 'wp_braintree_lang'),
@@ -26,7 +26,7 @@ class wp_braintree_post {
         $menu_icon = WPB_URL . '/js/images/wp_braintree.png';
         $args = array(
             'label' => __('payments', 'wp_braintree_lang'),
-            'description' => __('Braintree Payments', 'wp_braintree_lang'),
+            'description' => __('WP Braintree', 'wp_braintree_lang'),
             'labels' => $labels,
             'supports' => array('title', 'editor', 'excerpt', 'revisions', 'custom-fields',),
             'hierarchical' => false,

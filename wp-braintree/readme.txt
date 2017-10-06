@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.5
+Stable tag: 1.6
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -16,6 +16,8 @@ This plugin allows you to accept payments using Braintree payment gateway on you
 Users can easily pay with credit cards for your products or services using one-click "Buy Now" button.
 
 You can accept credit card payment for products, services or digital downloads using this plugin.
+
+The orders are saved in the database so it can be viewed from the admin dashboard.
 
 = Settings Configuration =
 
@@ -72,6 +74,11 @@ None
 None
 
 == Changelog ==
+
+= 1.6 =
+* The payments are now saved in the database so the admin can view it from the admin dashboard.
+* The customer's name and email address is now collected in the checkbout form. This info is saved after the transaction and can be viewed from the admin dashboard.
+* Fixed an error that was being shown in the thank you page message.
 
 = 1.5 =
 * Added a new action hook (wp_braintree_payment_completed) so custom script can be run after a transaction.
