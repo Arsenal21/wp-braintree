@@ -4,7 +4,7 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: http://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 1.6
+ * Version: 1.7
  * Author: Tips and Tricks HQ, josh401, wptipsntricks
  * Author URI: http://www.tipsandtricks-hq.com/
  * License: GPL2
@@ -150,10 +150,10 @@ class wp_braintree {
             ?>
 
             <h2 class="nav-tab-wrapper">  
-                <a href="?post_type=braintree_payment&page=settings&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
-                <a href="?post_type=braintree_payment&page=settings&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
-                <a href="?post_type=braintree_payment&page=settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
-                <a href="?post_type=braintree_payment&page=settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a> 
+                <a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
+                <a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
+                <a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
+                <a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a> 
             </h2>  
 
             <div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">

@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -74,6 +74,9 @@ None
 None
 
 == Changelog ==
+
+= 1.7 =
+* Updated the settings menu slug to make it unique.
 
 = 1.6 =
 * The payments are now saved in the database so the admin can view it from the admin dashboard.
