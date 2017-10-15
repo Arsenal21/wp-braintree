@@ -20,9 +20,11 @@ jQuery(document).ready(function ($) {
 
     // This is used when the page is submitted; it displays the transaction result
     $("#dialog-message-success").dialog({// If payment was success; this is the message just before the redirect url
+        width: 'auto',
+        maxWidth: 600,
+        height: 'auto',
         modal: true,
-        width: 600,
-        height: 300,
+        fluid: true,
         buttons: {
             Ok: function () {
                 $(this).dialog("close");
@@ -35,9 +37,11 @@ jQuery(document).ready(function ($) {
         }
     });
     $("#dialog-message-error").dialog({// If payment failed; alert message with only option to go back and fix form to resubmit
+        width: 'auto',
+        maxWidth: 600,
+        height: 'auto',
         modal: true,
-        width: 600,
-        height: 300,
+        fluid: true,
         buttons: {
             Back: function () {
                 history.back();
@@ -136,9 +140,11 @@ jQuery(document).ready(function ($) {
                             if (wpbErrorMsg != '') {
                                 jQuery("<div>" + wpbErrorMsg + "</div>").dialog({
                                     title: wp_braintree_scripts_front_js_vars.val_errors,
+                                    width: 'auto',
+                                    maxWidth: 600,
+                                    height: 'auto',
                                     modal: true,
-                                    width: 600,
-                                    height: 300,
+                                    fluid: true,
                                     buttons: {
                                         Ok: function () {
                                             jQuery(this).dialog("close");
