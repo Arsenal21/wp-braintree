@@ -44,7 +44,7 @@
     width: auto;
 }
 
-div#expiration-month, div#expiration-year {
+div.wp-braintree-expiration-month, div.wp-braintree-expiration-year {
     display: inline-block;
     width: 45%;
 }
