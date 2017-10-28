@@ -50,10 +50,7 @@ jQuery(document).ready(function ($) {
                             event.preventDefault();
                         else {
                             wp_braintree_buttons[id].tokenizeSuccess = false;
-                            if (!confirm(wp_braintree_scripts_front_js_vars.confirm_trans))
-                                return false;
-                            else
-                                return true;
+                            return true;
                         }
                         hostedFieldsInstance.tokenize(function (err, payload) {
                             if (err) {
