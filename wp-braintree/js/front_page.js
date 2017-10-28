@@ -124,39 +124,42 @@ jQuery(document).ready(function ($) {
 //	braintree.onSubmitEncryptForm("braintree-payment-form"); 
 
     // This is used when the page is submitted; it displays the transaction result
-    $("#dialog-message-success").dialog({// If payment was success; this is the message just before the redirect url
-        width: 'auto',
-        maxWidth: 600,
-        height: 'auto',
-        modal: true,
-        fluid: true,
-        buttons: {
-            Ok: function () {
-                $(this).dialog("close");
+    if (typeof $("#dialog-message-success").dialog === 'function') {
+        $("#dialog-message-success").dialog({// If payment was success; this is the message just before the redirect url
+            width: 'auto',
+            maxWidth: 600,
+            height: 'auto',
+            modal: true,
+            fluid: true,
+            buttons: {
+                Ok: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function (event, ui) {
+                $(this).remove();
+                // Redirect after alert message
+                window.location = wp_braintree_scripts_front_js_vars.success_url;
             }
-        },
-        close: function (event, ui) {
-            $(this).remove();
-            // Redirect after alert message
-            window.location = wp_braintree_scripts_front_js_vars.success_url;
-        }
-    });
-    $("#dialog-message-error").dialog({// If payment failed; alert message with only option to go back and fix form to resubmit
-        width: 'auto',
-        maxWidth: 600,
-        height: 'auto',
-        modal: true,
-        fluid: true,
-        buttons: {
-            Back: function () {
+        });
+    }
+    if (typeof $("#dialog-message-error").dialog === 'function') {
+        $("#dialog-message-error").dialog({// If payment failed; alert message with only option to go back and fix form to resubmit
+            width: 'auto',
+            maxWidth: 600,
+            height: 'auto',
+            modal: true,
+            fluid: true,
+            buttons: {
+                Back: function () {
+                    history.back();
+                }
+            },
+            close: function (event, ui) {
                 history.back();
             }
-        },
-        close: function (event, ui) {
-            history.back();
-        }
-    });
-
+        });
+    }
     // Before we actually submit any form for transaction... we want to check the input fields.
     // This will help since each time the form is submitted.. all fields are cleared.
     // We could get around this using sessions.
