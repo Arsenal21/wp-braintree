@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.7
+Stable tag: 1.8
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -74,6 +74,13 @@ None
 None
 
 == Changelog ==
+
+= 1.8 =
+* Made sure the button and form are properly displayed if called using do_shortcode() (thanks to monolith920 for reporting).
+* Removed confirmation popup when user clicks "Buy now" button after filling in CC details.
+* Added all available parameters to shortcode inserter.
+* Added "show_form" shortcode parameter to display payment form without the need to click a button first (thanks to ranakamransl for reporting).
+* Added support for multiple buttons on a single page (thanks to benjino for reporting).
 
 = 1.7 =
 * Updated the settings menu slug to make it unique.
