@@ -1,5 +1,5 @@
 === WP Braintree ===
-Contributors: Tips and Tricks HQ, josh401, wptipsntricks
+Contributors: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
 Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0

@@ -239,7 +239,7 @@ msgid "Expiration (MM/YYYY)"
 msgstr ""
 
 #: ../main.php:426
-msgid "Braintree Credit Card Transaction Form"
+msgid "Credit Card Transaction Form"
 msgstr ""
 
 #: ../lang/mce_lang.php:6

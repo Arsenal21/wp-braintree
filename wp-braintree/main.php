@@ -4,7 +4,7 @@
  * Plugin URI: http://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
  * Version: 1.8
- * Author: Tips and Tricks HQ, josh401, wptipsntricks
+ * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
  * Author URI: http://www.tipsandtricks-hq.com/
  * License: GPL2
  */
@@ -338,7 +338,7 @@ class wp_braintree {
             </form>
 
             <div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">	
-                <p>If you need a feature rich and supported plugin for accepting Braintree payments then check out our <a target="_blank" href="http://www.tipsandtricks-hq.com/?p=1059">WP eStore Plugin</a> (You will love the WP eStore Plugin).</p>
+                <p>If you need a feature rich and supported plugin for accepting Braintree payments then check out our <a target="_blank" href="https://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059">WP eStore Plugin</a> (You will love the WP eStore Plugin).</p>
             </div>
 
         </div> <!-- End wrap -->
@@ -581,7 +581,7 @@ class wp_braintree {
         ?>
 
         <div class="dialog-form<?php echo empty($show_form) ? '' : '-show' ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>">
-            <h3><?php echo __('Braintree Credit Card Transaction Form', 'wp_braintree_lang'); ?></h3>
+            <h3><?php echo __('Credit Card Transaction Form', 'wp_braintree_lang'); ?></h3>
             <form method="POST" id="braintree-payment-form-<?php echo $this->buttons_on_page; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>" class="braintree-payment-form pure-form pure-form-stacked">
                 <input type="hidden" id="wp-braintree-nonce-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-nonce" value="">
                 <input type="hidden" name="wp-braintree-submit" value="1">

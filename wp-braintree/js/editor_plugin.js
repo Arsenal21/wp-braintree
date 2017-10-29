@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
               	<tr>\
 			<th><label for="wp_braintree-url">Show Form At Once</label></th>\
 			<td><input type="checkbox" name="show_form" id="wp_braintree-show_form" value="1" /><br />\
-			<small>If checked, payment form will be displayed at once, without the need to click a button first.</small>\
+			<small>If checked, payment form will be displayed at once, without the need to click the buy button first.</small>\
 		</tr>\
         </table>\
 	<p class="submit">\
