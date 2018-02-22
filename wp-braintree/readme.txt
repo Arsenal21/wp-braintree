@@ -4,14 +4,14 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 4.9
-Stable tag: 1.8
+Stable tag: 1.9
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
 
 == Description ==
 
-This plugin allows you to accept payments using Braintree payment gateway on your WordPress site. 
+This plugin allows you to accept payments using Braintree payment gateway on your WordPress site.
 
 Users can easily pay with credit cards for your products or services using one-click "Buy Now" button.
 
@@ -26,7 +26,7 @@ Once you have installed the plugin you need to provide your Braintree merchant d
 * Merchant ID
 * Public Key
 * Private Key
- 
+
 Now create a new post/page and insert Braintree shortcode for your product. For example:
 
 `[wp_braintree_button item_name="Test Product" item_amount="5.00"]`
@@ -47,7 +47,7 @@ For screenshots, detailed documentation, support and updates, please visit: [Wor
 
 You need to embed the appropriate shortcode on a post/page to create Braintree Buy Now button.
 
-Instructions for using the shortcodes are available at the following URL: 
+Instructions for using the shortcodes are available at the following URL:
 [Accept Braintree Payments Usage Instruction](https://www.tipsandtricks-hq.com/wordpress-braintree-plugin)
 
 == Installation ==
@@ -75,6 +75,9 @@ None
 
 == Changelog ==
 
+= 1.9 =
+* Customer info (Name and Email) is now saved in Braintree account.
+
 = 1.8 =
 * Made sure the button and form are properly displayed if called using do_shortcode() (thanks to monolith920 for reporting).
 * Removed confirmation popup when user clicks "Buy now" button after filling in CC details.
@@ -97,7 +100,7 @@ None
 * Upgraded the Braintree library to the latest version.
 * Everything should keep working the way it used to, however you should delete any cache (if you are using caching) to make sure all the new changes are loaded.
 
-= 1.3 = 
+= 1.3 =
 * Added better price validation and checking in the plugin.
 
 = 1.2 =
@@ -106,5 +109,5 @@ None
 = 1.1 =
 * Added a new feature to accommodate the selling of a digital item via this plugin. You can specify the URL of a digital item in the shortcode using the "url" parameter.
 
-= 1.0 = 
+= 1.0 =
 * First commit to the wordpress repository

@@ -3,12 +3,12 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: http://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 1.8
+ * Version: 1.9
  * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
  * Author URI: http://www.tipsandtricks-hq.com/
  * License: GPL2
  */
-DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '1.8' );
+DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '1.9' );
 
 class wp_braintree {
 
@@ -105,7 +105,7 @@ class wp_braintree {
 	$options = get_option( $this->option_name );
 
 	$valid			 = array();
-	$valid[ 'sandbox_mode' ]	 = isset( $input[ 'sandbox_mode' ] ) ? '1' : '0';
+	$valid[ 'sandbox_mode' ] = isset( $input[ 'sandbox_mode' ] ) ? '1' : '0';
 	$valid[ 'auth_only' ]	 = isset( $input[ 'auth_only' ] ) ? '1' : '0';
 	//$valid['create_customer'] = isset($input['create_customer']) ? '1' : '0';
 	$valid[ 'success_url' ]	 = isset( $input[ 'success_url' ] ) ? esc_url( $input[ 'success_url' ] ) : '';
@@ -125,7 +125,7 @@ class wp_braintree {
 	}
 	wp_enqueue_script( 'jquery-ui-tabs' );  // For admin panel page tabs
 	wp_enqueue_script( 'jquery-ui-dialog' );  // For admin panel popup alerts
-	wp_enqueue_script( 'wp_braintree_scripts', plugins_url( '/js/admin_page.js', __FILE__ ), array( 'jquery' ) );  // Apply admin page scripts       
+	wp_enqueue_script( 'wp_braintree_scripts', plugins_url( '/js/admin_page.js', __FILE__ ), array( 'jquery' ) );  // Apply admin page scripts
 	wp_enqueue_style( 'wp_braintree_styles', plugins_url( '/css/admin_page.css', __FILE__ ) );  // Apply admin page styles
 	wp_enqueue_style( 'jquery-ui-theme', plugins_url( '/css/themes/smoothness/jquery-ui.css', __FILE__ ) );  //include jquery-ui.css (smoothness theme)
     }
@@ -151,12 +151,12 @@ class wp_braintree {
 	    $active_tab	 = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'api_keys';
 	    ?>
 
-	    <h2 class="nav-tab-wrapper">  
+	    <h2 class="nav-tab-wrapper">
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
-		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a> 
-	    </h2>  
+		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a>
+	    </h2>
 
 	    <div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
 		For usage documentation and updates, please visit the plugin page at the following URL:<br>
@@ -189,9 +189,9 @@ class wp_braintree {
 	    		    </td>
 	    		</tr>
 	    		<!--
-	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                              ?></th>
+	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                        ?></th>
 	    		    <td>
-	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                            ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                             ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                             ?>/>
+	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                      ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                       ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                       ?>/>
 	    			<br />
 			    <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')      ?>
 	    		    </td>
@@ -258,7 +258,7 @@ class wp_braintree {
 	    	    </p>
 
 	    	    <!--
-	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                              ?></h3>
+	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                        ?></h3>
 	    	    <p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');     ?>
 	    	    <br />
@@ -337,7 +337,7 @@ class wp_braintree {
 		</p>
 	    </form>
 
-	    <div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">	
+	    <div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">
 		<p>If you need a feature rich and supported plugin for accepting Braintree payments then check out our <a target="_blank" href="https://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059">WP eStore Plugin</a> (You will love the WP eStore Plugin).</p>
 	    </div>
 
@@ -414,6 +414,19 @@ class wp_braintree {
 	    // Find out if user wants to authorize only
 	    // If not, we are going to submit the transaction for settlement immediately
 	    $auth_only = $opts[ 'auth_only' ] == '1' ? 'yes' : 'no';
+
+	    $full_name = sanitize_text_field( $_POST[ 'wp-braintree-name' ] );
+
+	    $parts		 = explode( " ", $full_name );
+	    $last_name	 = array_pop( $parts );
+	    $first_name	 = implode( " ", $parts );
+
+	    $customer = array(
+		'firstName'	 => $first_name,
+		'lastName'	 => $last_name,
+		'email'		 => sanitize_email( $_POST[ 'wp-braintree-email' ] ),
+	    );
+
 	    try {
 		if ( $auth_only == 'no' ) {
 		    // Submit transaction for settlement
@@ -421,6 +434,7 @@ class wp_braintree {
 			'amount'		 => $wpb_amount,
 			'paymentMethodNonce'	 => $wpb_nonce,
 			'channel'		 => 'TipsandTricks_SP',
+			'customer'		 => $customer,
 			'options'		 => [
 			    'submitForSettlement' => True
 			]
@@ -431,6 +445,7 @@ class wp_braintree {
 			'amount'		 => $wpb_amount,
 			'channel'		 => 'TipsandTricks_SP',
 			'paymentMethodNonce'	 => $wpb_nonce,
+			'customer'		 => $customer,
 		    ] );
 		}
 	    } catch ( Excepction $e ) {
@@ -472,8 +487,8 @@ class wp_braintree {
 
 		$payment_data			 = array();
 		$payment_data[ 'name' ]		 = sanitize_text_field( $_POST[ 'wp-braintree-name' ] );
-		$payment_data[ 'email' ]		 = sanitize_email( $_POST[ 'wp-braintree-email' ] );
-		$payment_data[ 'amount' ]		 = $item_price;
+		$payment_data[ 'email' ]	 = sanitize_email( $_POST[ 'wp-braintree-email' ] );
+		$payment_data[ 'amount' ]	 = $item_price;
 		$payment_data[ 'item_name' ]	 = $item_name;
 		$payment_data[ 'trans_id' ]	 = $result->transaction->id;
 		$payment_data[ 'order_id' ]	 = $wp_braintree_order_id;
@@ -673,11 +688,11 @@ class wp_braintree {
 	$options_api[ 'public_key' ]	 = isset( $options_api[ 'public_key' ] ) ? $options_api[ 'public_key' ] : '';
 	$options_api[ 'private_key' ]	 = isset( $options_api[ 'private_key' ] ) ? $options_api[ 'private_key' ] : '';
 
-	$options[ 'sandbox_mode' ] = isset( $options[ 'sandbox_mode' ] ) ? $options[ 'sandbox_mode' ] : '0';
-	$options[ 'auth_only' ]	 = isset( $options[ 'auth_only' ] ) ? $options[ 'auth_only' ] : '0';
+	$options[ 'sandbox_mode' ]	 = isset( $options[ 'sandbox_mode' ] ) ? $options[ 'sandbox_mode' ] : '0';
+	$options[ 'auth_only' ]		 = isset( $options[ 'auth_only' ] ) ? $options[ 'auth_only' ] : '0';
 	//$options['create_customer'] = isset($options['create_customer']) ? $options['create_customer'] : '0';
 	$options[ 'success_url' ]	 = isset( $options[ 'success_url' ] ) ? $options[ 'success_url' ] : '';
-	$options[ 'jq_theme' ]	 = isset( $options[ 'jq_theme' ] ) ? $options[ 'jq_theme' ] : 'smoothness';
+	$options[ 'jq_theme' ]		 = isset( $options[ 'jq_theme' ] ) ? $options[ 'jq_theme' ] : 'smoothness';
 
 	update_option( $this->option_name, $options );
 	update_option( $this->api_keys_name, $options_api );
