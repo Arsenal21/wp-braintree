@@ -469,7 +469,7 @@ class wp_braintree {
 		    wp_die( __( 'Item name could not be found!', 'wp_braintree_lang' ) );
 		}
 		//Item price
-		$trans_name	 = 'wp-braintree-' . sanitize_title_with_dashes( $item_name );
+		$trans_name	 = 'wp-braintree-' . md5( $item_name );
 		$item_price	 = get_transient( $trans_name ); //Read the price for this item from the system.
 		if ( ! isset( $item_price ) || ! is_numeric( $item_price ) ) {
 		    wp_die( __( 'Error! Item price is missing or invalid!', 'wp_braintree_lang' ) );
@@ -551,7 +551,7 @@ class wp_braintree {
 	$this->wp_braintree_get_api();
 
 	//Generate an order ID to reference the transaction
-	$order_id = uniqid();
+	$order_id = md5(uniqid());
 
 	// Get url of current page (used for the redirect - which adds a hash to the current page - which MUST be read from the redirect url)
 	$cur_page = $this->curPageURL();
@@ -585,9 +585,9 @@ class wp_braintree {
 	    $button_text = 'Buy Now';
 	}
 	$trans_name	 = 'wp-braintree-' . $order_id; //Create key using the order ID.
-	set_transient( $trans_name, $item_name, 2 * 3600 ); //Save the item name for this item for 2 hours.
-	$trans_name	 = 'wp-braintree-' . sanitize_title_with_dashes( $item_name ); //Create key using the item name.
-	set_transient( $trans_name, $item_amount, 2 * 3600 ); //Save the price for this item for 2 hours.
+	set_transient( $trans_name, $item_name, 24 * 3600 ); //Save the item name for this item for 2 hours.
+	$trans_name	 = 'wp-braintree-' . md5( $item_name ); //Create key using the item name.
+	set_transient( $trans_name, $item_amount, 24 * 3600 ); //Save the price for this item for 2 hours.
 	// Generate the associated form output for payment processing
 	// These are hidden on page load via jquery.
 	// Clicking the button[code] above.. shows/hides the associated form.

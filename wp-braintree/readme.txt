@@ -77,6 +77,7 @@ None
 
 = 1.9 =
 * Customer info (Name and Email) is now saved in Braintree account.
+* Special characters in item name should no longer result in "Item name could not be found" error (thanks to eaglesparis for reporting).
 
 = 1.8 =
 * Made sure the button and form are properly displayed if called using do_shortcode() (thanks to monolith920 for reporting).
