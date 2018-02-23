@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: WP BrainTree
- * Plugin URI: http://www.tipsandtricks-hq.com/wordpress-braintree-plugin
+ * Plugin URI: https://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
  * Version: 1.9
  * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
- * Author URI: http://www.tipsandtricks-hq.com/
+ * Author URI: https://www.tipsandtricks-hq.com/
  * License: GPL2
  */
 DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '1.9' );
