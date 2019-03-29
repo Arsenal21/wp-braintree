@@ -189,9 +189,9 @@ class wp_braintree {
 	    		    </td>
 	    		</tr>
 	    		<!--
-	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                 ?></th>
+	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                  ?></th>
 	    		    <td>
-	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                               ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                ?>/>
+	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                                ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                 ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                 ?>/>
 	    			<br />
 			    <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')      ?>
 	    		    </td>
@@ -258,7 +258,7 @@ class wp_braintree {
 	    	    </p>
 
 	    	    <!--
-	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                 ?></h3>
+	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                  ?></h3>
 	    	    <p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');     ?>
 	    	    <br />
@@ -393,6 +393,7 @@ class wp_braintree {
 		'check_fields'		 => __( 'Please check fields.', 'wp_braintree_lang' ),
 		'fill_fields'		 => __( 'Please fill fields.', 'wp_braintree_lang' ),
 		'val_errors'		 => __( 'Validation Errors:', 'wp_braintree_lang' ),
+		'error_occurred'	 => __( 'Error Occurred:', 'wp_braintree_lang' ),
 		'confirm_trans'		 => __( 'You are about to submit this transaction. Continue?', 'wp_braintree_lang' )
 	    ) );
 	    ?>

@@ -114,7 +114,7 @@ div.wpb-slash {
     height: 19px;
     display: inline-block;
     border-radius: 50%;
-    background: rgb(17,91,219);
+    background: #0078e7;
 }
 .wp-braintree-spinner i:first-child{
     opacity: 0;

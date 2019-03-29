@@ -66,12 +66,12 @@ jQuery(document).ready(function ($) {
 			}
 
 			$('button[data-wp-braintree-button-id="' + id + '"]').hide();
-			$('#wp-braintree-spinner-container').insertAfter('button[data-wp-braintree-button-id="' + id + '"]');
+			$('#wp-braintree-spinner-container').insertAfter('button[data-wp-braintree-button-id="' + id + '"]:not(.submit_buy_now)');
 			$('#wp-braintree-spinner-container').show();
 
 			hostedFieldsInstance.tokenize(function (err, payload) {
 			    if (err) {
-				wpbErrorMsg = '';
+				var wpbErrorMsg = '';
 				if (typeof err.details != "undefined") {
 				    var firstInvalidField = err.details.invalidFieldKeys[0];
 				    switch (firstInvalidField) {
@@ -109,7 +109,7 @@ jQuery(document).ready(function ($) {
 					}
 				    });
 				    $('#wp-braintree-spinner-container').hide();
-				    $('button[data-wp-braintree-button-id="' + id + '"]').show();
+				    $('button[data-wp-braintree-button-id="' + id + '"]:not(.submit_buy_now)').show();
 				}
 			    } else {
 				jQuery('#wp-braintree-nonce-' + id).val(payload.nonce);
@@ -131,14 +131,16 @@ jQuery(document).ready(function ($) {
 				}, function (err, response) {
 				    if (err) {
 					console.error(err);
+					$('#wp-braintree-spinner-container').hide();
+					$('button[data-wp-braintree-button-id="' + id + '"]:not(.submit_buy_now)').show();
+					alert(wp_braintree_scripts_front_js_vars.error_occurred + ' ' + err);
+					return;
 				    } else {
 //					console.log(response);
 					jQuery('#wp-braintree-nonce-' + id).val(response.nonce);
 				    }
 				    console.log('3DS check done');
 				    wp_braintree_buttons[id].tokenizeSuccess = true;
-				    $('#wp-braintree-spinner-container').hide();
-				    $('button[data-wp-braintree-button-id="' + id + '"]').show();
 				    jQuery('button[data-wp-braintree-button-id="' + id + '"]').prop('disabled', true);
 				    jQuery('#braintree-payment-form-' + id).submit();
 				});
@@ -150,12 +152,14 @@ jQuery(document).ready(function ($) {
 	}
     }
 
-    // Hide ALL forms on page load
-    $('.dialog-form').hide();
-
+    $('.wp-braintree-3ds-modal-close-btn').click(function () {
+	$('div.wp-braintree-3ds-modal-container').fadeOut();
+	$('#wp-braintree-spinner-container').hide();
+	$('button[data-wp-braintree-button-id]:not(.submit_buy_now)').show();
+    });
 
     // When a "buy now" button is clicked
-    $('.submit_buy_now').click(function (e) {
+    $('button.submit_buy_now').click(function (e) {
 
 	e.preventDefault();
 	id = $(this).attr('data-wp-braintree-button-id');
