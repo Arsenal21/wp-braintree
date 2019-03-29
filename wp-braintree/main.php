@@ -189,9 +189,9 @@ class wp_braintree {
 	    		    </td>
 	    		</tr>
 	    		<!--
-	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                           ?></th>
+	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                 ?></th>
 	    		    <td>
-	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                         ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                          ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                          ?>/>
+	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                               ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                ?>/>
 	    			<br />
 			    <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')      ?>
 	    		    </td>
@@ -258,7 +258,7 @@ class wp_braintree {
 	    	    </p>
 
 	    	    <!--
-	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                           ?></h3>
+	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                 ?></h3>
 	    	    <p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');     ?>
 	    	    <br />
@@ -355,8 +355,9 @@ class wp_braintree {
     // This function gets loaded into the HEAD of any post/page using the shortcode
     public function head_styles_scripts() {
 	//register Braintree frontend scripts to enqueue them later if needed
-	wp_register_script( 'wp_braintree_braintree_client', 'https://js.braintreegateway.com/web/3.6.0/js/client.min.js', null, null );
-	wp_register_script( 'wp_braintree_braintree_hosted_fields', 'https://js.braintreegateway.com/web/3.6.0/js/hosted-fields.min.js', null, null );
+	wp_register_script( 'wp-braintree-braintree-client', 'https://js.braintreegateway.com/web/3.43.0/js/client.min.js', null, null );
+	wp_register_script( 'wp-braintree-braintree-hosted-fields', 'https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.min.js', null, null );
+	wp_register_script( 'wp-braintree-braintree-three-d-secure', 'https://js.braintreegateway.com/web/3.43.0/js/three-d-secure.min.js', null, null );
 	wp_register_style( 'wp_braintree_styles_front', plugins_url( '/css/front_page.css', __FILE__ ), null, WP_BRAINTREE_PLUGIN_VERSION );    // Apply frontend styles
 	wp_register_script( 'wp_braintree_scripts_front', plugins_url( '/js/front_page.js', __FILE__ ), array( 'jquery' ), WP_BRAINTREE_PLUGIN_VERSION, true );  // Apply frontend scripts
     }
@@ -394,6 +395,20 @@ class wp_braintree {
 		'val_errors'		 => __( 'Validation Errors:', 'wp_braintree_lang' ),
 		'confirm_trans'		 => __( 'You are about to submit this transaction. Continue?', 'wp_braintree_lang' )
 	    ) );
+	    ?>
+	    <div id="wp-braintree-3ds-modal-container" class="wp-braintree-3ds-modal-container" style="display: none;">
+	        <div id ="wp-braintree-3ds-modal" class="wp-braintree-3ds-modal">
+	    	<div class="wp-braintree-3ds-modal-header">
+	    	    <span class="wp-braintree-3ds-modal-close-btn">&times;</span>
+	    	</div>
+	    	<div id ="wp-braintree-3ds-modal-content" class="wp-braintree-3ds-modal-content">
+	    	</div>
+	        </div>
+	    </div>
+	    <div id="wp-braintree-spinner-container" class="wp-braintree-spinner-container" style="display: none;">
+	        <div class="wp-braintree-spinner"><i></i><i></i><i></i><i></i></div>
+	    </div>
+	    <?php
 	}
 
 	if ( isset( $_POST[ 'wp-braintree-nonce' ] ) && ! empty( $_POST[ 'wp-braintree-nonce' ] ) ) {
@@ -596,7 +611,7 @@ class wp_braintree {
 	ob_start();
 	?>
 
-	<div class="dialog-form<?php echo empty( $show_form ) ? '' : '-show' ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>">
+	<div class="dialog-form<?php echo empty( $show_form ) ? '' : '-show' ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"<?php echo empty( $show_form ) ? 'style="display: none;"' : ''; ?>>
 	    <h3><?php echo __( 'Credit Card Transaction Form', 'wp_braintree_lang' ); ?></h3>
 	    <form method="POST" id="braintree-payment-form-<?php echo $this->buttons_on_page; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>" class="braintree-payment-form pure-form pure-form-stacked">
 		<input type="hidden" id="wp-braintree-nonce-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-nonce" value="">
@@ -666,8 +681,9 @@ class wp_braintree {
 	wp_localize_script( 'wp_braintree_scripts_front', 'wp_braintree_buttons_data_' . $this->buttons_on_page, array(
 	    'client_token' => $clientToken,
 	) );
-	wp_enqueue_script( 'wp_braintree_braintree_client' );
-	wp_enqueue_script( 'wp_braintree_braintree_hosted_fields' );
+	wp_enqueue_script( 'wp-braintree-braintree-client' );
+	wp_enqueue_script( 'wp-braintree-braintree-hosted-fields' );
+	wp_enqueue_script( 'wp-braintree-braintree-three-d-secure' );
 	wp_enqueue_style( 'wp_braintree_styles_front', plugins_url( '/css/front_page.css', __FILE__ ), null, WP_BRAINTREE_PLUGIN_VERSION );    // Apply frontend styles
 	wp_enqueue_script( 'wp_braintree_scripts_front', plugins_url( '/js/front_page.js', __FILE__ ), array( 'jquery' ), WP_BRAINTREE_PLUGIN_VERSION, true );  // Apply frontend scripts
 

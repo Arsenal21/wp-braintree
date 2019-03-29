@@ -10,6 +10,18 @@ jQuery(document).ready(function ($) {
 		    console.error(err);
 		    return;
 		}
+
+		braintree.threeDSecure.create({
+		    client: clientInstance
+		}, function (threeDSecureErr, threeDSecureInstance) {
+		    if (threeDSecureErr) {
+			console.error(err);
+			return;
+		    }
+
+		    threeDSecure = threeDSecureInstance;
+		});
+
 		braintree.hostedFields.create({
 		    client: clientInstance,
 		    styles: {
@@ -52,6 +64,11 @@ jQuery(document).ready(function ($) {
 			    wp_braintree_buttons[id].tokenizeSuccess = false;
 			    return true;
 			}
+
+			$('button[data-wp-braintree-button-id="' + id + '"]').hide();
+			$('#wp-braintree-spinner-container').insertAfter('button[data-wp-braintree-button-id="' + id + '"]');
+			$('#wp-braintree-spinner-container').show();
+
 			hostedFieldsInstance.tokenize(function (err, payload) {
 			    if (err) {
 				wpbErrorMsg = '';
@@ -77,7 +94,7 @@ jQuery(document).ready(function ($) {
 				} else {
 				    wpbErrorMsg = wp_braintree_scripts_front_js_vars.fill_fields;
 				}
-				if (wpbErrorMsg != '') {
+				if (wpbErrorMsg !== '') {
 				    jQuery("<div>" + wpbErrorMsg + "</div>").dialog({
 					title: wp_braintree_scripts_front_js_vars.val_errors,
 					width: 'auto',
@@ -91,12 +108,40 @@ jQuery(document).ready(function ($) {
 					    }
 					}
 				    });
+				    $('#wp-braintree-spinner-container').hide();
+				    $('button[data-wp-braintree-button-id="' + id + '"]').show();
 				}
 			    } else {
 				jQuery('#wp-braintree-nonce-' + id).val(payload.nonce);
-				wp_braintree_buttons[id].tokenizeSuccess = true;
-				jQuery('button[data-wp-braintree-button-id="' + id + '"]').prop('disabled', true);
-				jQuery('#braintree-payment-form-' + id).submit();
+				console.log("Starting 3DS verify...");
+				var amount = $('form#braintree-payment-form-' + id).find('input[name="item_amount"]').val();
+				var bt3DSModalContent = document.getElementById('wp-braintree-3ds-modal-content');
+				threeDSecure.verifyCard({
+				    amount: amount,
+				    nonce: payload.nonce,
+				    addFrame: function (err, iframe) {
+					console.log('Adding 3DS frame');
+					bt3DSModalContent.appendChild(iframe);
+					$('div.wp-braintree-3ds-modal-container').fadeIn();
+				    },
+				    removeFrame: function () {
+					console.log('Removing 3DS frame');
+					$('div.wp-braintree-3ds-modal-container').fadeOut();
+				    }
+				}, function (err, response) {
+				    if (err) {
+					console.error(err);
+				    } else {
+//					console.log(response);
+					jQuery('#wp-braintree-nonce-' + id).val(response.nonce);
+				    }
+				    console.log('3DS check done');
+				    wp_braintree_buttons[id].tokenizeSuccess = true;
+				    $('#wp-braintree-spinner-container').hide();
+				    $('button[data-wp-braintree-button-id="' + id + '"]').show();
+				    jQuery('button[data-wp-braintree-button-id="' + id + '"]').prop('disabled', true);
+				    jQuery('#braintree-payment-form-' + id).submit();
+				});
 			    }
 			});
 		    });
