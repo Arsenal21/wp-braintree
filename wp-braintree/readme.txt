@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 5.0
-Stable tag: 1.9
+Stable tag: 2.0
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -74,6 +74,11 @@ None
 None
 
 == Changelog ==
+
+= 2.0 =
+* Added 3D Secure support.
+* Credit Card payment forms are no longer unrolled for a second on page load.
+* Added spinner after button click to indicate that payment is being processed.
 
 = 1.9 =
 * Customer info (Name and Email) is now saved in Braintree account.

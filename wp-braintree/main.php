@@ -3,12 +3,12 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: https://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 1.9
+ * Version: 2.0
  * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
  * Author URI: https://www.tipsandtricks-hq.com/
  * License: GPL2
  */
-DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '1.9' );
+DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '2.0' );
 
 class wp_braintree {
 
@@ -189,9 +189,9 @@ class wp_braintree {
 	    		    </td>
 	    		</tr>
 	    		<!--
-	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                  ?></th>
+	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                    ?></th>
 	    		    <td>
-	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                                ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                 ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                 ?>/>
+	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                                  ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                   ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                   ?>/>
 	    			<br />
 			    <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')      ?>
 	    		    </td>
@@ -258,7 +258,7 @@ class wp_braintree {
 	    	    </p>
 
 	    	    <!--
-	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                  ?></h3>
+	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                    ?></h3>
 	    	    <p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');     ?>
 	    	    <br />
@@ -369,6 +369,8 @@ class wp_braintree {
 	$opts		 = get_option( $this->option_name );
 	$success_url	 = (isset( $opts[ 'success_url' ] ) && ! empty( $opts[ 'success_url' ] )) ? $opts[ 'success_url' ] : home_url();
 
+	$button_form = '';
+
 	if ( $this->buttons_on_page === 0 ) {
 	    $select_theme = isset( $opts[ 'jq_theme' ] ) ? $opts[ 'jq_theme' ] : 'smoothness';
 
@@ -396,6 +398,7 @@ class wp_braintree {
 		'error_occurred'	 => __( 'Error Occurred:', 'wp_braintree_lang' ),
 		'confirm_trans'		 => __( 'You are about to submit this transaction. Continue?', 'wp_braintree_lang' )
 	    ) );
+	    ob_start();
 	    ?>
 	    <div id="wp-braintree-3ds-modal-container" class="wp-braintree-3ds-modal-container" style="display: none;">
 	        <div id ="wp-braintree-3ds-modal" class="wp-braintree-3ds-modal">
@@ -410,6 +413,7 @@ class wp_braintree {
 	        <div class="wp-braintree-spinner"><i></i><i></i><i></i><i></i></div>
 	    </div>
 	    <?php
+	    $button_form = ob_get_clean();
 	}
 
 	if ( isset( $_POST[ 'wp-braintree-nonce' ] ) && ! empty( $_POST[ 'wp-braintree-nonce' ] ) ) {
@@ -592,7 +596,6 @@ class wp_braintree {
 	}
 
 	// Begin shortcode div
-	$button_form	 = '';
 	$button_form	 .= '<link rel="stylesheet" href="' . plugin_dir_url( __FILE__ ) . 'css/pure-min.css">';
 	$button_form	 .= '<link rel="stylesheet" href="' . plugin_dir_url( __FILE__ ) . 'css/forms-min.css">';
 	$button_form	 .= '<link rel="stylesheet" href="' . plugin_dir_url( __FILE__ ) . 'css/grids-responsive-min.css">';
