@@ -3,12 +3,12 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: https://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 2.0
+ * Version: 2.0.1
  * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
  * Author URI: https://www.tipsandtricks-hq.com/
  * License: GPL2
  */
-DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '2.0' );
+DEFINE( "WP_BRAINTREE_PLUGIN_VERSION", '2.0.1' );
 
 class wp_braintree {
 
@@ -189,9 +189,9 @@ class wp_braintree {
 	    		    </td>
 	    		</tr>
 	    		<!--
-	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                    ?></th>
+	    		<tr valign="top"><th scope="row"><?php //_e('Create Customer:', 'wp_braintree_lang')                                                                                                     ?></th>
 	    		    <td>
-	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                                  ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                   ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                   ?>/>
+	    			<input id="create_customer" type="checkbox" name="<?php //echo $this->option_name                                                                                                   ?>[create_customer]" value="<?php //echo $options_opts['create_customer'];                                                                                                    ?>" <?php //if($options_opts['create_customer']) echo 'checked=checked'                                                                                                    ?>/>
 	    			<br />
 			    <?php //_e('Checking this option will create a new customer on each successful transaction.', 'wp_braintree_lang')      ?>
 	    		    </td>
@@ -258,7 +258,7 @@ class wp_braintree {
 	    	    </p>
 
 	    	    <!--
-	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                    ?></h3>
+	    	    <h3><?php //_e('Create Customer' ,'wp_braintree_lang');                                                                                                     ?></h3>
 	    	    <p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang');     ?>
 	    	    <br />

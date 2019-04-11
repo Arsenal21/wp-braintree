@@ -113,37 +113,44 @@ jQuery(document).ready(function ($) {
 				}
 			    } else {
 				jQuery('#wp-braintree-nonce-' + id).val(payload.nonce);
-				console.log("Starting 3DS verify...");
-				var amount = $('form#braintree-payment-form-' + id).find('input[name="item_amount"]').val();
-				var bt3DSModalContent = document.getElementById('wp-braintree-3ds-modal-content');
-				threeDSecure.verifyCard({
-				    amount: amount,
-				    nonce: payload.nonce,
-				    addFrame: function (err, iframe) {
-					console.log('Adding 3DS frame');
-					bt3DSModalContent.appendChild(iframe);
-					$('div.wp-braintree-3ds-modal-container').fadeIn();
-				    },
-				    removeFrame: function () {
-					console.log('Removing 3DS frame');
-					$('div.wp-braintree-3ds-modal-container').fadeOut();
-				    }
-				}, function (err, response) {
-				    if (err) {
-					console.error(err);
-					$('#wp-braintree-spinner-container').hide();
-					$('button[data-wp-braintree-button-id="' + id + '"]:not(.submit_buy_now)').show();
-					alert(wp_braintree_scripts_front_js_vars.error_occurred + ' ' + err);
-					return;
-				    } else {
+				if (typeof threeDSecure !== "undefined") {
+				    console.log("Starting 3DS verify...");
+				    var amount = $('form#braintree-payment-form-' + id).find('input[name="item_amount"]').val();
+				    var bt3DSModalContent = document.getElementById('wp-braintree-3ds-modal-content');
+				    threeDSecure.verifyCard({
+					amount: amount,
+					nonce: payload.nonce,
+					addFrame: function (err, iframe) {
+					    console.log('Adding 3DS frame');
+					    bt3DSModalContent.appendChild(iframe);
+					    $('div.wp-braintree-3ds-modal-container').fadeIn();
+					},
+					removeFrame: function () {
+					    console.log('Removing 3DS frame');
+					    $('div.wp-braintree-3ds-modal-container').fadeOut();
+					}
+				    }, function (err, response) {
+					if (err) {
+					    console.error(err);
+					    $('#wp-braintree-spinner-container').hide();
+					    $('button[data-wp-braintree-button-id="' + id + '"]:not(.submit_buy_now)').show();
+					    alert(wp_braintree_scripts_front_js_vars.error_occurred + ' ' + err);
+					    return;
+					} else {
 //					console.log(response);
-					jQuery('#wp-braintree-nonce-' + id).val(response.nonce);
-				    }
-				    console.log('3DS check done');
+					    jQuery('#wp-braintree-nonce-' + id).val(response.nonce);
+					}
+					console.log('3DS check done');
+					wp_braintree_buttons[id].tokenizeSuccess = true;
+					jQuery('button[data-wp-braintree-button-id="' + id + '"]').prop('disabled', true);
+					jQuery('#braintree-payment-form-' + id).submit();
+				    });
+				} else {
+				    console.log('3DS not available');
 				    wp_braintree_buttons[id].tokenizeSuccess = true;
 				    jQuery('button[data-wp-braintree-button-id="' + id + '"]').prop('disabled', true);
 				    jQuery('#braintree-payment-form-' + id).submit();
-				});
+				}
 			    }
 			});
 		    });
