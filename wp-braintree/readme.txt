@@ -19,6 +19,8 @@ You can accept credit card payment for products, services or digital downloads u
 
 The orders are saved in the database so it can be viewed from the admin dashboard.
 
+This plugin also supports 3D Secure Payment option. So if you enable 3D Secure Payment in your Braintree account, this plugin will work with that option.
+
 = Settings Configuration =
 
 Once you have installed the plugin you need to provide your Braintree merchant details in the settings menu (Settings -> WP Braintree).
