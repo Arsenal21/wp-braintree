@@ -21,6 +21,8 @@ The orders are saved in the database so it can be viewed from the admin dashboar
 
 This plugin also supports 3D Secure Payment option. So if you enable 3D Secure Payment in your Braintree account, this plugin will work with that option.
 
+https://www.youtube.com/watch?v=kfzz8U8azbM
+
 = Settings Configuration =
 
 Once you have installed the plugin you need to provide your Braintree merchant details in the settings menu (Settings -> WP Braintree).
