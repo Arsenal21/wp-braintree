@@ -148,59 +148,61 @@ class wp_braintree {
 		$options_opts = get_option( $this->option_name );
 		$options_api  = get_option( $this->api_keys_name );
 		?>
-	<div class="wrap">
-		<div id="icon-themes" class="icon32"></div>
-		<h2><?php _e( 'WP BrainTree Options', 'wp_braintree_lang' ); ?></h2>
+<div class="wrap">
+	<div id="icon-themes" class="icon32"></div>
+	<h2><?php _e( 'WP BrainTree Options', 'wp_braintree_lang' ); ?></h2>
 
 		<?php
 		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'api_keys';
 		?>
 
-		<h2 class="nav-tab-wrapper">
+	<h2 class="nav-tab-wrapper">
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=api_keys" class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=options" class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=active_buttons" class="nav-tab <?php echo $active_tab == 'active_buttons' ? 'nav-tab-active' : ''; ?>">Active Buttons</a>
-		</h2>
+	</h2>
 
-		<div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
+	<div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
 		For usage documentation and updates, please visit the plugin page at the following URL:<br>
 		<a target="_blank" href="https://www.tipsandtricks-hq.com/wordpress-braintree-plugin">WordPress Braintree Plugin</a>
-		</div>
+	</div>
 
-		<form method="post" action="options.php">
+	<form method="post" action="options.php">
 
 		<?php
 		if ( $active_tab == 'options' ) { // OPTIONS TAB
 			?>
-			<div class="postbox">
+		<div class="postbox">
 			<?php settings_fields( 'wp_braintree_options' ); ?>
-				<h3><?php _e( 'Additional Options:', 'wp_braintree_lang' ); ?></h3>
-				<table class="form-table">
-				<tr valign="top"><th scope="row"><?php _e( 'Sandbox Mode:', 'wp_braintree_lang' ); ?></th>
+			<h3><?php _e( 'Additional Options:', 'wp_braintree_lang' ); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Sandbox Mode:', 'wp_braintree_lang' ); ?></th>
 					<td>
-					<input id="sandbox_mode" type="checkbox" name="<?php echo $this->option_name; ?>[sandbox_mode]" value="<?php echo esc_attr( $options_opts['sandbox_mode'] ); ?>" 
-																			  <?php
-																				if ( $options_opts['sandbox_mode'] ) {
-																					echo 'checked=checked';}
-																				?>
-					/>
-					<br />
-					<?php _e( 'Check to run the plugin in sandbox mode.', 'wp_braintree_lang' ); ?>
+						<input id="sandbox_mode" type="checkbox" name="<?php echo $this->option_name; ?>[sandbox_mode]" value="<?php echo esc_attr( $options_opts['sandbox_mode'] ); ?>" 
+																				  <?php
+																					if ( $options_opts['sandbox_mode'] ) {
+																						echo 'checked=checked';}
+																					?>
+																				 />
+						<br />
+						<?php _e( 'Check to run the plugin in sandbox mode.', 'wp_braintree_lang' ); ?>
 					</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e( 'Authorize Only:', 'wp_braintree_lang' ); ?></th>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Authorize Only:', 'wp_braintree_lang' ); ?></th>
 					<td>
-					<input id="auth_only" type="checkbox" name="<?php echo $this->option_name; ?>[auth_only]" value="<?php echo esc_attr( $options_opts['auth_only'] ); ?>" 
-																		   <?php
-																			if ( $options_opts['auth_only'] ) {
-																				echo 'checked=checked';}
-																			?>
-					/>
-					<br />
-					<?php _e( 'Checking this option processes transactions in an "Authorized" status.', 'wp_braintree_lang' ); ?>
-					<br />
-					<?php _e( 'Unchecking this option processes transactions in a "Submitted for Settlement" status.', 'wp_braintree_lang' ); ?>
+						<input id="auth_only" type="checkbox" name="<?php echo $this->option_name; ?>[auth_only]" value="<?php echo esc_attr( $options_opts['auth_only'] ); ?>" 
+																			   <?php
+																				if ( $options_opts['auth_only'] ) {
+																					echo 'checked=checked';}
+																				?>
+																			 />
+						<br />
+						<?php _e( 'Checking this option processes transactions in an "Authorized" status.', 'wp_braintree_lang' ); ?>
+						<br />
+						<?php _e( 'Unchecking this option processes transactions in a "Submitted for Settlement" status.', 'wp_braintree_lang' ); ?>
 					</td>
 				</tr>
 				<!--
@@ -212,62 +214,64 @@ class wp_braintree {
 					</td>
 				</tr>
 				-->
-				<tr valign="top"><th scope="row"><?php _e( 'Success URL:', 'wp_braintree_lang' ); ?></th>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Success URL:', 'wp_braintree_lang' ); ?></th>
 					<td>
-					<input id="success_url" type="text" size="60" name="<?php echo $this->option_name; ?>[success_url]" value="<?php echo esc_url_raw( $options_opts['success_url'] ); ?>" 
-																				   <?php
-																					if ( $options_opts['success_url'] ) {
-																						echo 'checked=checked';}
-																					?>
-					/>
-					<br />
-					<?php _e( 'Enter a return url for successful transactions (a thank you page).', 'wp_braintree_lang' ); ?>
-					<br />
-					<?php _e( 'If no url is specified (blank), the user will be redirected to the home page.', 'wp_braintree_lang' ); ?>
+						<input id="success_url" type="text" size="60" name="<?php echo $this->option_name; ?>[success_url]" value="<?php echo esc_url_raw( $options_opts['success_url'] ); ?>" 
+																					   <?php
+																						if ( $options_opts['success_url'] ) {
+																							echo 'checked=checked';}
+																						?>
+																					 />
+						<br />
+						<?php _e( 'Enter a return url for successful transactions (a thank you page).', 'wp_braintree_lang' ); ?>
+						<br />
+						<?php _e( 'If no url is specified (blank), the user will be redirected to the home page.', 'wp_braintree_lang' ); ?>
 					</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e( 'jQuery Theme', 'wp_braintree_lang' ); ?></th>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'jQuery Theme', 'wp_braintree_lang' ); ?></th>
 					<td>
-					<select name="<?php echo $this->option_name; ?>[jq_theme]"/>
-					<?php
-					$jquery_themes = array( /* 'base', */ 'black-tie', 'blitzer', 'cupertino', 'dark-hive', 'dot-luv', 'eggplant', 'excite-bike', 'flick', 'hot-sneaks', 'humanity', 'le-frog', 'mint-choc', 'overcast', 'pepper-grinder', 'redmond', 'smoothness', 'south-street', 'start', 'sunny', 'swanky-purse', 'trontastic', 'ui-darkness', 'ui-lightness', 'vader' );
+						<select name="<?php echo $this->option_name; ?>[jq_theme]" />
+						<?php
+						$jquery_themes = array( /* 'base', */ 'black-tie', 'blitzer', 'cupertino', 'dark-hive', 'dot-luv', 'eggplant', 'excite-bike', 'flick', 'hot-sneaks', 'humanity', 'le-frog', 'mint-choc', 'overcast', 'pepper-grinder', 'redmond', 'smoothness', 'south-street', 'start', 'sunny', 'swanky-purse', 'trontastic', 'ui-darkness', 'ui-lightness', 'vader' );
 
-					foreach ( $jquery_themes as $jquery_theme ) {
-						$selected = ( $options_opts['jq_theme'] == $jquery_theme ) ? 'selected="selected"' : '';
-						echo "<option value='" . esc_attr( $jquery_theme ) . "' $selected>$jquery_theme</option>";
-					}
-					?>
-					</select>
-					<br />
-					<?php _e( 'Select jQuery theme used for user notifications.', 'wp_braintree_lang' ); ?>
+						foreach ( $jquery_themes as $jquery_theme ) {
+							$selected = ( $options_opts['jq_theme'] == $jquery_theme ) ? 'selected="selected"' : '';
+							echo "<option value='" . esc_attr( $jquery_theme ) . "' $selected>$jquery_theme</option>";
+						}
+						?>
+						</select>
+						<br />
+						<?php _e( 'Select jQuery theme used for user notifications.', 'wp_braintree_lang' ); ?>
 					</td>
 				</tr>
-				</table>
-			</div>
+			</table>
+		</div>
 			<?php
 		} elseif ( $active_tab == 'help' ) {  // HELP TAB
 			?>
-			<div class="postbox">
-				<h3><?php _e( 'Acquire API Keys', 'wp_braintree_lang' ); ?></h3>
-				<p>
+		<div class="postbox">
+			<h3><?php _e( 'Acquire API Keys', 'wp_braintree_lang' ); ?></h3>
+			<p>
 				<?php _e( 'It is first necessary to register for an account with <a target="_blank" href="https://www.braintreepayments.com/">BrainTree</a>.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'Once an account is acquired, the following information can be found by logging in and clicking "Account -> My User -> API Keys".', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'This plugin is set to run in the BrainTree "Production" environment. If desired, the plugin may be switched to the "Sandbox" environment via the appropriate option.', 'wp_braintree_lang' ); ?>
-				</p>
+			</p>
 
-				<h3><?php _e( 'Sandbox Mode', 'wp_braintree_lang' ); ?></h3>
-				<p>
+			<h3><?php _e( 'Sandbox Mode', 'wp_braintree_lang' ); ?></h3>
+			<p>
 				<?php _e( 'By default, this plugin will perform all transactions assuming the API keys are from a BrainTree Live Production Account.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'The plugin may be switched to perform transactions into a BrainTree Sandbox Account; commonly used for testing.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'Remember; a BrainTree Production Account and a BrainTree Sandbox Account will have different API keys.', 'wp_braintree_lang' ); ?>
-				</p>
+			</p>
 
-				<h3><?php _e( 'Authorize Only', 'wp_braintree_lang' ); ?></h3>
-				<p>
+			<h3><?php _e( 'Authorize Only', 'wp_braintree_lang' ); ?></h3>
+			<p>
 				<?php _e( 'By default, this plugin will submit transactions immediatly for settlement as they are transacted.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'If preferred, the plugin can be switched to perform all transactions as an Authorized status.', 'wp_braintree_lang' ); ?>
@@ -275,9 +279,9 @@ class wp_braintree {
 				<?php _e( 'This means the funds will be authorized by BrainTree, but will not be available until the transaction is manually submitted for settlement.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'Authorized transactions may be manually submitted for settlement via the BrainTree admin control panel.', 'wp_braintree_lang' ); ?>
-				</p>
+			</p>
 
-				<!--
+			<!--
 				<h3><?php //_e('Create Customer' ,'wp_braintree_lang'); ?></h3>
 				<p>
 			<?php //_e('By default, this plugin will display a "quick form" asking the customer only for the credit card number, card cvv code and card expiration date.' ,'wp_braintree_lang'); ?>
@@ -290,25 +294,25 @@ class wp_braintree {
 				</p>
 				-->
 
-				<h3><?php _e( 'jQuery Theme', 'wp_braintree_lang' ); ?></h3>
-				<p>
+			<h3><?php _e( 'jQuery Theme', 'wp_braintree_lang' ); ?></h3>
+			<p>
 				<?php _e( 'By default, this plugin will use the "Smoothness" jQuery dialog theme when display dialog alerts during the checkout process.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'Additional jQuery themes are available to help match the look and appearance of the website.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( "If you've never seen them before, take a moment to view a few. It's fun!", 'wp_braintree_lang' ); ?>
-				</p>
-			</div>
+			</p>
+		</div>
 			<?php
 		} elseif ( $active_tab == 'active_buttons' ) {  // ACTIVE BUTTONS TAB
 			?>
-			<div class="postbox">
-				<h3><?php _e( 'Active Pages Currently Using Shortcode', 'wp_braintree_lang' ); ?></h3>
-				<p>
+		<div class="postbox">
+			<h3><?php _e( 'Active Pages Currently Using Shortcode', 'wp_braintree_lang' ); ?></h3>
+			<p>
 				<?php _e( 'Here is a convenient list of all pages currently using the WP BrainTree button shortcode.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'The titles link direcly to the permalinks of the pages (new window).', 'wp_braintree_lang' ); ?>
-				</p>
+			</p>
 
 			<?php
 			// Let's be nice and display all pages using the button shortcode to the admin user
@@ -319,7 +323,7 @@ class wp_braintree {
 				while ( $the_query->have_posts() ) {
 					$the_query->the_post();
 					?>
-				<li><a target="_blank" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+			<li><a target="_blank" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 					<?php
 				}
 				echo '</ul>';
@@ -328,42 +332,45 @@ class wp_braintree {
 			}
 			wp_reset_postdata();
 			?>
-			</div>
+		</div>
 			<?php
 		} else {  // API KEYS TAB
 			?>
-			<div class="postbox">
+		<div class="postbox">
 			<?php settings_fields( 'wp_braintree_api_keys' ); ?>
-				<p>
+			<p>
 				<?php _e( 'It is first necessary to register for an account with <a target="_blank" href="https://www.braintreepayments.com/">BrainTree</a>.', 'wp_braintree_lang' ); ?>
 				<br />
 				<?php _e( 'Once an account is acquired, the following information can be found by logging in and clicking "Account -> My User -> API Keys".', 'wp_braintree_lang' ); ?>
-				</p>
-				<table class="form-table">
-				<tr valign="top"><th scope="row"><?php _e( 'Merchant ID:', 'wp_braintree_lang' ); ?></th>
+			</p>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Merchant ID:', 'wp_braintree_lang' ); ?></th>
 					<td><input id="merchant_id" type="text" name="<?php echo $this->api_keys_name; ?>[merchant_id]" value="<?php echo esc_attr( $options_api['merchant_id'] ); ?>" /></td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e( 'Public Key:', 'wp_braintree_lang' ); ?></th>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Public Key:', 'wp_braintree_lang' ); ?></th>
 					<td><input id="public_key" type="text" name="<?php echo $this->api_keys_name; ?>[public_key]" value="<?php echo esc_attr( $options_api['public_key'] ); ?>" /></td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e( 'Private Key:', 'wp_braintree_lang' ); ?></th>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Private Key:', 'wp_braintree_lang' ); ?></th>
 					<td><input id="private_key" type="text" name="<?php echo $this->api_keys_name; ?>[private_key]" value="<?php echo esc_attr( $options_api['private_key'] ); ?>" /></td>
 				</tr>
-				</table>
-			</div>
+			</table>
+		</div>
 			<?php
 		}
 		?>
 		<p class="submit">
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'wp_braintree_lang' ); ?>" />
 		</p>
-		</form>
+	</form>
 
-		<div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">
+	<div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">
 		<p>If you need a feature rich and supported plugin for accepting Braintree payments then check out our <a target="_blank" href="https://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059">WP eStore Plugin</a> (You will love the WP eStore Plugin).</p>
-		</div>
+	</div>
 
-	</div> <!-- End wrap -->
+</div> <!-- End wrap -->
 		<?php
 	}
 
@@ -426,18 +433,18 @@ class wp_braintree {
 			);
 			ob_start();
 			?>
-		<div id="wp-braintree-3ds-modal-container" class="wp-braintree-3ds-modal-container" style="display: none;">
-			<div id ="wp-braintree-3ds-modal" class="wp-braintree-3ds-modal">
-			<div class="wp-braintree-3ds-modal-header">
-				<span class="wp-braintree-3ds-modal-close-btn">&times;</span>
-			</div>
-			<div id ="wp-braintree-3ds-modal-content" class="wp-braintree-3ds-modal-content">
-			</div>
-			</div>
+<div id="wp-braintree-3ds-modal-container" class="wp-braintree-3ds-modal-container" style="display: none;">
+	<div id="wp-braintree-3ds-modal" class="wp-braintree-3ds-modal">
+		<div class="wp-braintree-3ds-modal-header">
+			<span class="wp-braintree-3ds-modal-close-btn">&times;</span>
 		</div>
-		<div id="wp-braintree-spinner-container" class="wp-braintree-spinner-container" style="display: none;">
-			<div class="wp-braintree-spinner"><i></i><i></i><i></i><i></i></div>
+		<div id="wp-braintree-3ds-modal-content" class="wp-braintree-3ds-modal-content">
 		</div>
+	</div>
+</div>
+<div id="wp-braintree-spinner-container" class="wp-braintree-spinner-container" style="display: none;">
+	<div class="wp-braintree-spinner"><i></i><i></i><i></i><i></i></div>
+</div>
 			<?php
 			$button_form = ob_get_clean();
 		}
@@ -651,9 +658,9 @@ class wp_braintree {
 		ob_start();
 		?>
 
-	<div class="dialog-form<?php echo empty( $show_form ) ? '' : '-show'; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"<?php echo empty( $show_form ) ? 'style="display: none;"' : ''; ?>>
-		<h3><?php echo __( 'Credit Card Transaction Form', 'wp_braintree_lang' ); ?></h3>
-		<form method="POST" id="braintree-payment-form-<?php echo $this->buttons_on_page; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>" class="braintree-payment-form pure-form pure-form-stacked">
+<div class="dialog-form<?php echo empty( $show_form ) ? '' : '-show'; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>" <?php echo empty( $show_form ) ? 'style="display: none;"' : ''; ?>>
+	<h3><?php echo __( 'Credit Card Transaction Form', 'wp_braintree_lang' ); ?></h3>
+	<form method="POST" id="braintree-payment-form-<?php echo $this->buttons_on_page; ?>" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>" class="braintree-payment-form pure-form pure-form-stacked">
 		<input type="hidden" id="wp-braintree-nonce-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-nonce" value="">
 		<input type="hidden" name="wp-braintree-submit" value="1">
 		<input type="hidden" name="item_name" value="<?php echo $item_name; ?>" />
@@ -661,62 +668,62 @@ class wp_braintree {
 		<input type="hidden" name="wpb_order_id" value="<?php echo $order_id; ?>" />
 		<fieldset>
 			<div class="pure-g">
-			<div class="pure-u-1 pure-u-md-1-2">
-				<div class="pure-control-group">
-				<label><?php echo __( 'Item Name', 'wp_braintree_lang' ); ?></label>
-				<span name="item_name_form"><?php echo $item_name; ?></span>
+				<div class="pure-u-1 pure-u-md-1-2">
+					<div class="pure-control-group">
+						<label><?php echo __( 'Item Name', 'wp_braintree_lang' ); ?></label>
+						<span name="item_name_form"><?php echo $item_name; ?></span>
+					</div>
 				</div>
-			</div>
-			<div class="pure-u-1 pure-u-md-1-2">
-				<div class="pure-control-group">
-				<label><?php echo __( 'Item Price', 'wp_braintree_lang' ); ?></label>
-				<span name="item_price_form"><?php echo $item_amount; ?></span>
+				<div class="pure-u-1 pure-u-md-1-2">
+					<div class="pure-control-group">
+						<label><?php echo __( 'Item Price', 'wp_braintree_lang' ); ?></label>
+						<span name="item_price_form"><?php echo $item_amount; ?></span>
+					</div>
 				</div>
-			</div>
 			</div>
 		</fieldset>
 		<fieldset>
 			<div class="pure-control-group">
-			<label for="wp-braintree-name"><?php echo __( 'Name', 'wp_braintree_lang' ); ?></label>
-			<input type="text" id="wp-braintree-name-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-name" placeholder="<?php echo __( 'Name', 'wp_braintree_lang' ); ?>" required>
+				<label for="wp-braintree-name"><?php echo __( 'Name', 'wp_braintree_lang' ); ?></label>
+				<input type="text" id="wp-braintree-name-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-name" placeholder="<?php echo __( 'Name', 'wp_braintree_lang' ); ?>" required>
 			</div>
 			<div class="pure-control-group">
-			<label for="wp-braintree-email"><?php echo __( 'Email', 'wp_braintree_lang' ); ?></label>
-			<input type="email" id="wp-braintree-email-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-email" placeholder="<?php echo __( 'Email', 'wp_braintree_lang' ); ?>" required>
+				<label for="wp-braintree-email"><?php echo __( 'Email', 'wp_braintree_lang' ); ?></label>
+				<input type="email" id="wp-braintree-email-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-email" placeholder="<?php echo __( 'Email', 'wp_braintree_lang' ); ?>" required>
 			</div>
 			<div class="pure-control-group">
-			<label><?php echo __( 'Card Number', 'wp_braintree_lang' ); ?></label>
-			<div class="wpb-form-control" id="wp-braintree-card-number-<?php echo $this->buttons_on_page; ?>" data-braintree-field="number"></div>
+				<label><?php echo __( 'Card Number', 'wp_braintree_lang' ); ?></label>
+				<div class="wpb-form-control" id="wp-braintree-card-number-<?php echo $this->buttons_on_page; ?>" data-braintree-field="number"></div>
 			</div>
 			<div class="pure-g">
-			<div class="pure-u-1 pure-u-md-2-3">
-				<div class="pure-control-group">
-				<label><?php echo __( 'Expiration (MM / YY)', 'wp_braintree_lang' ); ?></label>
-				<div class="wpb-form-control wp-braintree-expiration-month" id="wp-braintree-expiration-month-<?php echo $this->buttons_on_page; ?>"></div>
-				<div class="wpb-slash"> / </div>
-				<div class="wpb-form-control wp-braintree-expiration-year" id="wp-braintree-expiration-year-<?php echo $this->buttons_on_page; ?>"></div>
+				<div class="pure-u-1 pure-u-md-2-3">
+					<div class="pure-control-group">
+						<label><?php echo __( 'Expiration (MM / YY)', 'wp_braintree_lang' ); ?></label>
+						<div class="wpb-form-control wp-braintree-expiration-month" id="wp-braintree-expiration-month-<?php echo $this->buttons_on_page; ?>"></div>
+						<div class="wpb-slash"> / </div>
+						<div class="wpb-form-control wp-braintree-expiration-year" id="wp-braintree-expiration-year-<?php echo $this->buttons_on_page; ?>"></div>
+					</div>
 				</div>
-			</div>
-			<div class="pure-u-1 pure-u-md-1-3">
-				<div class="pure-control-group">
-				<label><?php echo __( 'CVV', 'wp_braintree_lang' ); ?></label>
-				<div class="wpb-form-control" id="wp-braintree-cvv-<?php echo $this->buttons_on_page; ?>" data-braintree-field="cvv"></div>
+				<div class="pure-u-1 pure-u-md-1-3">
+					<div class="pure-control-group">
+						<label><?php echo __( 'CVV', 'wp_braintree_lang' ); ?></label>
+						<div class="wpb-form-control" id="wp-braintree-cvv-<?php echo $this->buttons_on_page; ?>" data-braintree-field="cvv"></div>
+					</div>
 				</div>
-			</div>
 			</div>
 		</fieldset>
 		<div class="pure-controls">
 			<button type="submit" class="pure-button pure-button-primary" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"><?php echo esc_attr( $button_text ); ?></button>
 		</div>
-		</form>
-	</div>
+	</form>
+</div>
 		<?php if ( empty( $show_form ) ) { ?>
-		<div class="wp_braintree_button_div">
-			<form name="wp_braintree_button_submit" action="" method="POST" class="pure-form pure-form-stacked">
-			<button type="button" class="pure-button pure-button-primary submit_buy_now" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"><?php echo esc_attr( $button_text ); ?></button>
-			</form>
-		</div>
-	<?php } ?>
+<div class="wp_braintree_button_div">
+	<form name="wp_braintree_button_submit" action="" method="POST" class="pure-form pure-form-stacked">
+		<button type="button" class="pure-button pure-button-primary submit_buy_now" data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"><?php echo esc_attr( $button_text ); ?></button>
+	</form>
+</div>
+		<?php } ?>
 		<?php
 		wp_localize_script(
 			'wp_braintree_scripts_front',
