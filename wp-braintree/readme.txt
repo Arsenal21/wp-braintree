@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
 Requires at least: 3.0
 Tested up to: 5.4
-Stable tag: 2.0.2
+Stable tag: 2.0.3t1
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -78,6 +78,9 @@ None
 None
 
 == Changelog ==
+
+= WIP 2.0.3 =
+* Added Google reCaptcha support for credit card form.
 
 = 2.0.2 =
 * Updated Braintree PHP SDK to prevent deprecation notice when using PHP 7+.
