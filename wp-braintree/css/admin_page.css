@@ -1,6 +1,6 @@
 /* CSS Document */
 
-#merchant_id, #public_key, #private_key {
+#merchant_id, #public_key, #private_key, #re_site_key, #re_secret_key {
 	width: 400px;
 }
 #cse_key {

@@ -13,8 +13,9 @@ DEFINE( 'WP_BRAINTREE_PLUGIN_VERSION', '2.0.2' );
 class wp_braintree {
 
 	// Setup options used for this plugin
-	protected $option_name   = 'wp_braintree_opts';
-	protected $api_keys_name = 'wp_braintree_api_keys';
+	protected $option_name    = 'wp_braintree_opts';
+	protected $api_keys_name  = 'wp_braintree_api_keys';
+	protected $recaptcha_name = 'wp_braintree_recaptcha';
 	// These options will be used for default data
 	protected $data      = array(
 		'api_keys_tab' => array(
@@ -84,6 +85,7 @@ class wp_braintree {
 	public function admin_init() {
 		register_setting( 'wp_braintree_options', $this->option_name, array( $this, 'validate_options' ) );
 		register_setting( 'wp_braintree_api_keys', $this->api_keys_name, array( $this, 'validate_api_keys' ) );
+		register_setting( 'wp_braintree_recaptcha', $this->recaptcha_name, array( $this, 'validate_recaptcha_options' ) );
 	}
 
 	// Validate plugin input fields
@@ -112,6 +114,15 @@ class wp_braintree {
 		$valid['jq_theme']    = isset( $input['jq_theme'] ) ? $input['jq_theme'] : 'smoothness';
 
 		return $valid;
+	}
+
+	public function validate_recaptcha_options( $input ) {
+		$valid               = array();
+		$valid['enabled']    = isset( $input['enabled'] ) ? true : false;
+		$valid['site_key']   = isset( $input['site_key'] ) ? sanitize_text_field( $input['site_key'] ) : '';
+		$valid['secret_key'] = isset( $input['secret_key'] ) ? sanitize_text_field( $input['secret_key'] ) : '';
+
+		return $input;
 	}
 
 	// Initialize admin page
@@ -147,6 +158,7 @@ class wp_braintree {
 
 		$options_opts = get_option( $this->option_name );
 		$options_api  = get_option( $this->api_keys_name );
+		$options_re   = get_option( $this->recaptcha_name );
 		?>
 <div class="wrap">
 	<div id="icon-themes" class="icon32"></div>
@@ -161,6 +173,8 @@ class wp_braintree {
 			class="nav-tab <?php echo $active_tab == 'api_keys' ? 'nav-tab-active' : ''; ?>">API Keys</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=options"
 			class="nav-tab <?php echo $active_tab == 'options' ? 'nav-tab-active' : ''; ?>">Options</a>
+		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=recaptcha"
+			class="nav-tab <?php echo $active_tab == 'recaptcha' ? 'nav-tab-active' : ''; ?>">reCaptcha</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=help"
 			class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
 		<a href="?post_type=braintree_payment&page=wp_braintree_settings&tab=active_buttons"
@@ -255,6 +269,35 @@ class wp_braintree {
 						<br />
 						<?php _e( 'Select jQuery theme used for user notifications.', 'wp_braintree_lang' ); ?>
 					</td>
+				</tr>
+			</table>
+		</div>
+			<?php
+		} elseif ( $active_tab === 'recaptcha' ) {  // reCaptcha tab
+			?>
+		<div class="postbox">
+			<?php settings_fields( 'wp_braintree_recaptcha' ); ?>
+			<p>
+				<?php _e( 'Use Google reCaptcha if your payment forms are getting spammed by bots.', 'wp_braintree_lang' ); ?>
+			</p>
+			<p>
+				<?php _e( 'To start using it, you need to <a href="http://www.google.com/recaptcha/admin" target="_blank">sign up for an API key pair</a> for your site', 'wp_braintree_lang' ); ?>
+			</p>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Enable reCaptcha:', 'wp_braintree_lang' ); ?></th>
+					<td><input id="re_enabled" type="checkbox" name="<?php echo $this->recaptcha_name; ?>[enabled]"
+							value="1" <?php echo isset( $options_re['enabled'] ) ? 'checked' : ''; ?> /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Site Key:', 'wp_braintree_lang' ); ?></th>
+					<td><input id="re_site_key" type="text" name="<?php echo $this->recaptcha_name; ?>[site_key]"
+							value="<?php echo esc_attr( $options_re['site_key'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Secret Key:', 'wp_braintree_lang' ); ?></th>
+					<td><input id="re_secret_key" type="text" name="<?php echo $this->recaptcha_name; ?>[secret_key]"
+							value="<?php echo esc_attr( $options_re['secret_key'] ); ?>" /></td>
 				</tr>
 			</table>
 		</div>
@@ -407,6 +450,7 @@ class wp_braintree {
 		wp_register_script( 'wp-braintree-braintree-three-d-secure', 'https://js.braintreegateway.com/web/3.43.0/js/three-d-secure.min.js', null, null );
 		wp_register_style( 'wp_braintree_styles_front', plugins_url( '/css/front_page.css', __FILE__ ), null, WP_BRAINTREE_PLUGIN_VERSION );    // Apply frontend styles
 		wp_register_script( 'wp_braintree_scripts_front', plugins_url( '/js/front_page.js', __FILE__ ), array( 'jquery' ), WP_BRAINTREE_PLUGIN_VERSION, true );  // Apply frontend scripts
+		wp_register_script( 'wp_braintree_recaptcha_script', 'https://www.google.com/recaptcha/api.js?onload=wp_braintree_re_loaded&render=explicit' );
 	}
 
 	// End public function
@@ -418,6 +462,9 @@ class wp_braintree {
 
 		$button_form = '';
 
+		$re_enabled = false;
+		$re_opts    = get_option( $this->recaptcha_name );
+
 		if ( $this->buttons_on_page === 0 ) {
 			$select_theme = isset( $opts['jq_theme'] ) ? $opts['jq_theme'] : 'smoothness';
 
@@ -427,6 +474,12 @@ class wp_braintree {
 			if ( ! wp_script_is( 'jquery-ui-dialog' ) ) {
 				wp_enqueue_script( 'jquery-ui-dialog' );
 			}
+
+			if ( isset( $re_opts['enabled'] ) && $re_opts['enabled'] ) {
+				$re_enabled = true;
+				wp_enqueue_script( 'wp_braintree_recaptcha_script' );
+			}
+
 			wp_enqueue_style( 'jquery-ui-theme', plugins_url( '/css/themes/' . $select_theme . '/jquery-ui.css', __FILE__ ) );    // jquery ui styling
 			// Localize js langs
 			wp_localize_script(
@@ -468,6 +521,31 @@ class wp_braintree {
 		}
 
 		if ( isset( $_POST['wp-braintree-nonce'] ) && ! empty( $_POST['wp-braintree-nonce'] ) ) {
+			if ( $re_enabled ) {
+				$re_payload = filter_input( INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING );
+				$res        = wp_remote_post(
+					'https://www.google.com/recaptcha/api/siteverify',
+					array(
+						'body' => array(
+							'secret'   => $re_opts['secret_key'],
+							'response' => $re_payload,
+						),
+					)
+				);
+				if ( is_wp_error( $res ) ) {
+					wp_die( $res->get_error_message() );
+				}
+				if ( 200 !== $res['response']['code'] ) {
+					wp_die( 'HTTP error occurred during reCaptcha check: ' . $res['response']['code'] );
+				}
+
+				$result = json_decode( $res['body'], true );
+
+				if ( ! $result['success'] ) {
+					wp_die( 'Error(s) occurred during reCaptcha check: ' . implode( ',', $result['error-codes'] ) );
+				}
+			}
+
 			//payment has been posted, let's process it
 			$opts_api = get_option( $this->api_keys_name );
 
@@ -682,7 +760,29 @@ class wp_braintree {
 	<h3><?php echo __( 'Credit Card Transaction Form', 'wp_braintree_lang' ); ?></h3>
 	<form method="POST" id="braintree-payment-form-<?php echo $this->buttons_on_page; ?>"
 		data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"
-		class="braintree-payment-form pure-form pure-form-stacked">
+		class="braintree-payment-form pure-form pure-form-stacked" style="position:relative;">
+
+		<?php
+		if ( $re_enabled ) {
+			?>
+		<style>
+		.wp-braintree-re-cont div {
+			margin: 0 auto;
+		}
+		</style>
+		<div id="wp-braintree-re-form-<?php echo $this->buttons_on_page; ?>" style="display:none;">
+			<div id="wp-braintree-re-form-back-<?php echo $this->buttons_on_page; ?>"
+				style="position:absolute;width:100%;height:100%;background:white;opacity:0.9;"></div>
+			<div id="wp-braintree-re-form-cont-<?php echo $this->buttons_on_page; ?>"
+				style="position:absolute;width:100%;height:100%;">
+				<div class="wp-braintree-re-cont" id="wp-braintree-re-cont-<?php echo $this->buttons_on_page; ?>"
+					style="margin:0 auto;position:absolute;top:40%;text-align:center;width:100%;"></div>
+			</div>
+		</div>
+			<?php
+		}
+		?>
+
 		<input type="hidden" id="wp-braintree-nonce-<?php echo $this->buttons_on_page; ?>" name="wp-braintree-nonce"
 			value="">
 		<input type="hidden" name="wp-braintree-submit" value="1">
@@ -741,6 +841,7 @@ class wp_braintree {
 				</div>
 			</div>
 		</fieldset>
+		<div id="wp-braintree-re-container-<?php echo $this->buttons_on_page; ?>"></div>
 		<div class="pure-controls">
 			<button type="submit" class="pure-button pure-button-primary"
 				data-wp-braintree-button-id="<?php echo $this->buttons_on_page; ?>"><?php echo esc_attr( $button_text ); ?></button>
@@ -761,6 +862,8 @@ class wp_braintree {
 			'wp_braintree_buttons_data_' . $this->buttons_on_page,
 			array(
 				'client_token' => $clientToken,
+				're_enabled'   => $re_enabled,
+				're_site_key'  => isset( $re_opts['site_key'] ) ? $re_opts['site_key'] : '',
 			)
 		);
 		wp_enqueue_script( 'wp-braintree-braintree-client' );
@@ -847,6 +950,7 @@ class wp_braintree {
 		$tabs = array(
 			'api_keys'       => 'API Keys',
 			'options'        => 'Options',
+			'recaptcha'      => 'reCaptcha',
 			'help'           => 'Help',
 			'active_buttons' => 'Active Buttons',
 		);

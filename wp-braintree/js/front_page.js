@@ -1,6 +1,14 @@
+var wp_braintree_recaptcha_loaded = false;
+
+function wp_braintree_re_loaded() {
+	wp_braintree_recaptcha_loaded = true;
+}
+
 jQuery(document).ready(function ($) {
 
     function wp_braintree_create_instance(id) {
+		var reChecked = false;
+		
 	if (typeof braintree != 'undefined') {
 
 	    wp_braintree_buttons[id].handler = braintree.client.create({
@@ -58,6 +66,30 @@ jQuery(document).ready(function ($) {
 			return;
 		    }
 		    jQuery('#braintree-payment-form-' + id).submit(function (event) {
+				if (window['wp_braintree_buttons_data_' + id].re_enabled && !reChecked) {
+					event.preventDefault();
+					try {
+					grecaptcha.render('wp-braintree-re-cont-0', {
+						'sitekey' : window['wp_braintree_buttons_data_' + 0].re_site_key,
+						'callback': function() {
+							reChecked = true;
+							jQuery('#wp-braintree-re-form-'+id).fadeOut();
+							jQuery('#braintree-payment-form-' + id).trigger('submit');
+						}
+					  });
+					} catch (err) {
+						alert('reCaptcha error: ' + err.message);
+						return false;
+					}	
+					jQuery('#wp-braintree-re-form-'+id).fadeIn("slow", 
+					function() {
+						console.log(this);
+						jQuery('html, body').animate({
+							scrollTop: jQuery(this).offset().top
+						}, 1000);					}
+					);
+					return false;
+				}
 			if (!wp_braintree_buttons[id].tokenizeSuccess)
 			    event.preventDefault();
 			else {
