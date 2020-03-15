@@ -3,12 +3,12 @@
  * Plugin Name: WP BrainTree
  * Plugin URI: https://www.tipsandtricks-hq.com/wordpress-braintree-plugin
  * Description: Create "Buy Now" buttons for BrainTree payment gateway to accept payment for a product or service.
- * Version: 2.0.3t1
+ * Version: 2.0.3
  * Author: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
  * Author URI: https://www.tipsandtricks-hq.com/
  * License: GPL2
  */
-DEFINE( 'WP_BRAINTREE_PLUGIN_VERSION', '2.0.3t1' );
+DEFINE( 'WP_BRAINTREE_PLUGIN_VERSION', '2.0.3' );
 
 class wp_braintree {
 
@@ -201,7 +201,7 @@ class wp_braintree {
 					<th scope="row"><?php _e( 'Sandbox Mode:', 'wp_braintree_lang' ); ?></th>
 					<td>
 						<input id="sandbox_mode" type="checkbox" name="<?php echo $this->option_name; ?>[sandbox_mode]"
-							value="<?php echo esc_attr( $options_opts['sandbox_mode'] ); ?>" 
+							value="<?php echo esc_attr( $options_opts['sandbox_mode'] ); ?>"
 											  <?php
 												if ( $options_opts['sandbox_mode'] ) {
 													echo 'checked=checked';}
@@ -215,7 +215,7 @@ class wp_braintree {
 					<th scope="row"><?php _e( 'Authorize Only:', 'wp_braintree_lang' ); ?></th>
 					<td>
 						<input id="auth_only" type="checkbox" name="<?php echo $this->option_name; ?>[auth_only]"
-							value="<?php echo esc_attr( $options_opts['auth_only'] ); ?>" 
+							value="<?php echo esc_attr( $options_opts['auth_only'] ); ?>"
 											  <?php
 												if ( $options_opts['auth_only'] ) {
 													echo 'checked=checked';}
@@ -241,7 +241,7 @@ class wp_braintree {
 					<td>
 						<input id="success_url" type="text" size="60"
 							name="<?php echo $this->option_name; ?>[success_url]"
-							value="<?php echo esc_url_raw( $options_opts['success_url'] ); ?>" 
+							value="<?php echo esc_url_raw( $options_opts['success_url'] ); ?>"
 											  <?php
 												if ( $options_opts['success_url'] ) {
 													echo 'checked=checked';}
@@ -278,10 +278,10 @@ class wp_braintree {
 		<div class="postbox">
 			<?php settings_fields( 'wp_braintree_recaptcha' ); ?>
 			<p>
-				<?php _e( 'Use Google reCaptcha if your payment forms are getting spammed by bots.', 'wp_braintree_lang' ); ?>
+				<?php _e( 'Use Google reCAPTCHA if your payment forms are getting spammed by bots.', 'wp_braintree_lang' ); ?>
 			</p>
 			<p>
-				<?php _e( 'To start using it, you need to <a href="http://www.google.com/recaptcha/admin" target="_blank">sign up for an API key pair</a> for your site', 'wp_braintree_lang' ); ?>
+				<?php _e( 'To start using it, you need to <a href="http://www.google.com/recaptcha/admin" target="_blank">get Google reCAPTCHA API keys</a> for your site and enter the details below.', 'wp_braintree_lang' ); ?>
 			</p>
 			<table class="form-table">
 				<tr valign="top">
@@ -950,7 +950,7 @@ class wp_braintree {
 		$tabs = array(
 			'api_keys'       => 'API Keys',
 			'options'        => 'Options',
-			'recaptcha'      => 'reCaptcha',
+			'recaptcha'      => 'reCAPTCHA',
 			'help'           => 'Help',
 			'active_buttons' => 'Active Buttons',
 		);
