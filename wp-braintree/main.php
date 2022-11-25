@@ -445,9 +445,9 @@ class wp_braintree {
 	// This function gets loaded into the HEAD of any post/page using the shortcode
 	public function head_styles_scripts() {
 		//register Braintree frontend scripts to enqueue them later if needed
-		wp_register_script( 'wp-braintree-braintree-client', 'https://js.braintreegateway.com/web/3.43.0/js/client.min.js', null, null );
-		wp_register_script( 'wp-braintree-braintree-hosted-fields', 'https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.min.js', null, null );
-		wp_register_script( 'wp-braintree-braintree-three-d-secure', 'https://js.braintreegateway.com/web/3.43.0/js/three-d-secure.min.js', null, null );
+		wp_register_script( 'wp-braintree-braintree-client', 'https://js.braintreegateway.com/web/3.88.4/js/client.min.js', null, null );
+		wp_register_script( 'wp-braintree-braintree-hosted-fields', 'https://js.braintreegateway.com/web/3.88.4/js/hosted-fields.min.js', null, null );
+		wp_register_script( 'wp-braintree-braintree-three-d-secure', 'https://js.braintreegateway.com/web/3.88.4/js/three-d-secure.min.js', null, null );
 		wp_register_style( 'wp_braintree_styles_front', plugins_url( '/css/front_page.css', __FILE__ ), null, WP_BRAINTREE_PLUGIN_VERSION );    // Apply frontend styles
 		wp_register_script( 'wp_braintree_scripts_front', plugins_url( '/js/front_page.js', __FILE__ ), array( 'jquery' ), WP_BRAINTREE_PLUGIN_VERSION, true );  // Apply frontend scripts
 		wp_register_script( 'wp_braintree_recaptcha_script', 'https://www.google.com/recaptcha/api.js?onload=wp_braintree_re_loaded&render=explicit' );
