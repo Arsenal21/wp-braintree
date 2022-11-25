@@ -2,9 +2,9 @@
 Contributors: Tips and Tricks HQ, alexanderfoxc, wptipsntricks
 Donate link: https://www.tipsandtricks-hq.com/development-center
 Tags: braintree, payment gateway, cart, checkout, e-commerce, store, sales, sell, accept payment, payment, card payment, braintree payments
-Requires at least: 3.0
-Tested up to: 5.6
-Stable tag: 2.0.3
+Requires at least: 5.0
+Tested up to: 6.1
+Stable tag: 2.0.4
 License: GPLv2 or later
 
 Easily accept payments via Braintree payment gateway. Quick on-site checkout functionality.
@@ -78,6 +78,10 @@ None
 None
 
 == Changelog ==
+
+= 2.0.4 =
+* Updated Braintree integration to use 3DS version 2.
+* Updated Braintree SDK.
 
 = 2.0.3 =
 * Added Google reCAPTCHA support for credit card checkout form.
