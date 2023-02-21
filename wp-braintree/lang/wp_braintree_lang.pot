@@ -1,0 +1,469 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-02-21T02:21:41+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wp_braintree_lang\n"
+
+#: wp-braintree/includes/admin/post.class.php:11
+msgctxt "Post Type General Name"
+msgid "Payments"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:12
+msgctxt "Post Type Singular Name"
+msgid "Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:13
+#: wp-braintree/includes/admin/post.class.php:29
+msgid "WP Braintree"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:14
+msgid "Parent Payment:"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:15
+msgid "Payments"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:16
+msgid "View Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:17
+msgid "Add New Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:18
+msgid "Add New"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:19
+msgid "Edit Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:20
+msgid "Update Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:21
+msgid "Search Payment"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:22
+msgid "Not found"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:23
+msgid "Not found in Trash"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:28
+msgid "payments"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:56
+msgid "paid by "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:60
+msgid "<h4>Payment Details</h4>"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:61
+msgid "Payment Time: "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:62
+msgid "Transaction ID: "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:63
+msgid "Order ID: "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:66
+msgid "Item Name: "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:67
+msgid "Amount Paid: "
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:72
+msgid "<h4>Customer Details</h4>"
+msgstr ""
+
+#: wp-braintree/includes/admin/post.class.php:74
+msgid "E-Mail Address: "
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:5
+msgid "WP BrainTree"
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:6
+msgid "WP BrainTree Shortcode"
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:7
+msgid "Both input fields are required."
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:8
+#: wp-braintree/main.php:796
+msgid "Item Name"
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:9
+msgid "Specify the Item Name."
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:10
+#: wp-braintree/main.php:802
+msgid "Item Price"
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:11
+msgid "Specify the Item Price."
+msgstr ""
+
+#: wp-braintree/lang/mce_lang.php:12
+msgid "Insert Button Shortcode"
+msgstr ""
+
+#: wp-braintree/main.php:148
+#: wp-braintree/main.php:149
+msgid "Settings"
+msgstr ""
+
+#: wp-braintree/main.php:165
+msgid "WP BrainTree Options"
+msgstr ""
+
+#: wp-braintree/main.php:198
+msgid "Additional Options:"
+msgstr ""
+
+#: wp-braintree/main.php:201
+msgid "Sandbox Mode:"
+msgstr ""
+
+#: wp-braintree/main.php:211
+msgid "Check to run the plugin in sandbox mode."
+msgstr ""
+
+#: wp-braintree/main.php:215
+msgid "Authorize Only:"
+msgstr ""
+
+#: wp-braintree/main.php:225
+msgid "Checking this option processes transactions in an \"Authorized\" status."
+msgstr ""
+
+#: wp-braintree/main.php:227
+msgid "Unchecking this option processes transactions in a \"Submitted for Settlement\" status."
+msgstr ""
+
+#: wp-braintree/main.php:240
+msgid "Success URL:"
+msgstr ""
+
+#: wp-braintree/main.php:251
+msgid "Enter a return url for successful transactions (a thank you page)."
+msgstr ""
+
+#: wp-braintree/main.php:253
+msgid "If no url is specified (blank), the user will be redirected to the home page."
+msgstr ""
+
+#: wp-braintree/main.php:257
+#: wp-braintree/main.php:350
+msgid "jQuery Theme"
+msgstr ""
+
+#: wp-braintree/main.php:270
+msgid "Select jQuery theme used for user notifications."
+msgstr ""
+
+#: wp-braintree/main.php:281
+msgid "Use Google reCAPTCHA if your payment forms are getting spammed by bots."
+msgstr ""
+
+#: wp-braintree/main.php:284
+msgid "To start using it, you need to <a href=\"http://www.google.com/recaptcha/admin\" target=\"_blank\">get Google reCAPTCHA API keys</a> for your site and enter the details below."
+msgstr ""
+
+#: wp-braintree/main.php:288
+msgid "Enable reCaptcha:"
+msgstr ""
+
+#: wp-braintree/main.php:293
+msgid "Site Key:"
+msgstr ""
+
+#: wp-braintree/main.php:298
+msgid "Secret Key:"
+msgstr ""
+
+#: wp-braintree/main.php:308
+msgid "Acquire API Keys"
+msgstr ""
+
+#: wp-braintree/main.php:310
+#: wp-braintree/main.php:395
+msgid "It is first necessary to register for an account with <a target=\"_blank\" href=\"https://www.braintreepayments.com/\">BrainTree</a>."
+msgstr ""
+
+#: wp-braintree/main.php:312
+#: wp-braintree/main.php:397
+msgid "Once an account is acquired, the following information can be found by logging in and clicking \"Account -> My User -> API Keys\"."
+msgstr ""
+
+#: wp-braintree/main.php:314
+msgid "This plugin is set to run in the BrainTree \"Production\" environment. If desired, the plugin may be switched to the \"Sandbox\" environment via the appropriate option."
+msgstr ""
+
+#: wp-braintree/main.php:317
+msgid "Sandbox Mode"
+msgstr ""
+
+#: wp-braintree/main.php:319
+msgid "By default, this plugin will perform all transactions assuming the API keys are from a BrainTree Live Production Account."
+msgstr ""
+
+#: wp-braintree/main.php:321
+msgid "The plugin may be switched to perform transactions into a BrainTree Sandbox Account; commonly used for testing."
+msgstr ""
+
+#: wp-braintree/main.php:323
+msgid "Remember; a BrainTree Production Account and a BrainTree Sandbox Account will have different API keys."
+msgstr ""
+
+#: wp-braintree/main.php:326
+msgid "Authorize Only"
+msgstr ""
+
+#: wp-braintree/main.php:328
+msgid "By default, this plugin will submit transactions immediatly for settlement as they are transacted."
+msgstr ""
+
+#: wp-braintree/main.php:330
+msgid "If preferred, the plugin can be switched to perform all transactions as an Authorized status."
+msgstr ""
+
+#: wp-braintree/main.php:332
+msgid "This means the funds will be authorized by BrainTree, but will not be available until the transaction is manually submitted for settlement."
+msgstr ""
+
+#: wp-braintree/main.php:334
+msgid "Authorized transactions may be manually submitted for settlement via the BrainTree admin control panel."
+msgstr ""
+
+#: wp-braintree/main.php:352
+msgid "By default, this plugin will use the \"Smoothness\" jQuery dialog theme when display dialog alerts during the checkout process."
+msgstr ""
+
+#: wp-braintree/main.php:354
+msgid "Additional jQuery themes are available to help match the look and appearance of the website."
+msgstr ""
+
+#: wp-braintree/main.php:356
+msgid "If you've never seen them before, take a moment to view a few. It's fun!"
+msgstr ""
+
+#: wp-braintree/main.php:363
+msgid "Active Pages Currently Using Shortcode"
+msgstr ""
+
+#: wp-braintree/main.php:365
+msgid "Here is a convenient list of all pages currently using the WP BrainTree button shortcode."
+msgstr ""
+
+#: wp-braintree/main.php:367
+msgid "The titles link direcly to the permalinks of the pages (new window)."
+msgstr ""
+
+#: wp-braintree/main.php:384
+msgid "There are currently no posts using the shortcode."
+msgstr ""
+
+#: wp-braintree/main.php:401
+msgid "Merchant ID:"
+msgstr ""
+
+#: wp-braintree/main.php:406
+msgid "Public Key:"
+msgstr ""
+
+#: wp-braintree/main.php:411
+msgid "Private Key:"
+msgstr ""
+
+#: wp-braintree/main.php:422
+msgid "Save Changes"
+msgstr ""
+
+#: wp-braintree/main.php:490
+msgid "The Card Number is not a valid number."
+msgstr ""
+
+#: wp-braintree/main.php:491
+msgid "The Card Number must be between nine (9) and sixteen (16) digits."
+msgstr ""
+
+#: wp-braintree/main.php:492
+msgid "The CVV Number is not a valid number."
+msgstr ""
+
+#: wp-braintree/main.php:493
+msgid "The CVV Number must be three (3) digits exactly."
+msgstr ""
+
+#: wp-braintree/main.php:494
+msgid "The Expiration Month is not a valid number."
+msgstr ""
+
+#: wp-braintree/main.php:495
+msgid "The Expiration Month must be two (2) digits exactly."
+msgstr ""
+
+#: wp-braintree/main.php:496
+msgid "The Expiration Year is not a valid number."
+msgstr ""
+
+#: wp-braintree/main.php:497
+msgid "The Expiration Year must be four (4) digits exactly."
+msgstr ""
+
+#: wp-braintree/main.php:498
+msgid "Please check fields."
+msgstr ""
+
+#: wp-braintree/main.php:499
+msgid "Please fill fields."
+msgstr ""
+
+#: wp-braintree/main.php:500
+msgid "Validation Errors:"
+msgstr ""
+
+#: wp-braintree/main.php:501
+msgid "Error Occurred:"
+msgstr ""
+
+#: wp-braintree/main.php:502
+msgid "You are about to submit this transaction. Continue?"
+msgstr ""
+
+#: wp-braintree/main.php:608
+#: wp-braintree/main.php:732
+msgid "Braintree Authentication Error. Check your API keys."
+msgstr ""
+
+#: wp-braintree/main.php:617
+msgid "Error! Braintree order id could not be found!"
+msgstr ""
+
+#: wp-braintree/main.php:623
+msgid "Item name could not be found!"
+msgstr ""
+
+#: wp-braintree/main.php:629
+msgid "Error! Item price is missing or invalid!"
+msgstr ""
+
+#: wp-braintree/main.php:632
+msgid "Price Validation Error"
+msgstr ""
+
+#: wp-braintree/main.php:633
+msgid "Item Price: %1$d, Amount paid: %2$d"
+msgstr ""
+
+#: wp-braintree/main.php:656
+msgid "Purchase Success!"
+msgstr ""
+
+#: wp-braintree/main.php:657
+msgid "Congratulations! The transaction has completed successfully. Please keep the Transaction ID for your records."
+msgstr ""
+
+#: wp-braintree/main.php:660
+msgid "Click here"
+msgstr ""
+
+#: wp-braintree/main.php:661
+msgid " to download the item.<br /><br />"
+msgstr ""
+
+#: wp-braintree/main.php:663
+msgid "Transaction ID:"
+msgstr ""
+
+#: wp-braintree/main.php:669
+msgid "Transaction Error"
+msgstr ""
+
+#: wp-braintree/main.php:670
+msgid "Error: "
+msgstr ""
+
+#: wp-braintree/main.php:672
+msgid "Code: "
+msgstr ""
+
+#: wp-braintree/main.php:674
+msgid "Please use the browsers 'back' button to verify the input fields, and try again."
+msgstr ""
+
+#: wp-braintree/main.php:679
+msgid "Validation Error"
+msgstr ""
+
+#: wp-braintree/main.php:680
+msgid "Validation errors:<br/>"
+msgstr ""
+
+#: wp-braintree/main.php:684
+msgid "No transaction was submitted for processing."
+msgstr ""
+
+#: wp-braintree/main.php:686
+msgid "Please press the 'Back' button to verify the input fields, and re-submit."
+msgstr ""
+
+#: wp-braintree/main.php:760
+msgid "Credit Card Transaction Form"
+msgstr ""
+
+#: wp-braintree/main.php:810
+#: wp-braintree/main.php:812
+msgid "Name"
+msgstr ""
+
+#: wp-braintree/main.php:815
+#: wp-braintree/main.php:817
+msgid "Email"
+msgstr ""
+
+#: wp-braintree/main.php:820
+msgid "Card Number"
+msgstr ""
+
+#: wp-braintree/main.php:827
+msgid "Expiration (MM / YY)"
+msgstr ""
+
+#: wp-braintree/main.php:837
+msgid "CVV"
+msgstr ""
