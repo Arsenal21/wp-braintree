@@ -1,4 +1,4 @@
-name: On Push
+name: Generate POT
 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -18,7 +18,8 @@ jobs:
     - name: WordPress POT Generator
       uses: varunsridharan/action-wp-pot-generator@2.0
       with:
-        save_path: './lang'
+        save_path: './wp-braintree/lang'
         item_slug: 'wp-braintree'
+        domain: 'wp_braintree_lang'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
